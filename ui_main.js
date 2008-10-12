@@ -83,8 +83,7 @@ CalendarGadget.prototype.run = function() {
   // Footer links/buttons
   linkToday.onclick = Utils.bind(this.goToday, this);
   linkAddEvent.onclick = Utils.bind(this.quickAddEvent, this);
-
-  btnCalendars.onclick = Utils.bind(this.showOptions, this);
+  linkOptions.onclick = Utils.bind(this.showOptions, this);
   optionsClose.onclick = Utils.bind(this.optionsSaveClose, this);
 
   g_uiAgenda = new Agenda(agendaDiv);
@@ -256,12 +255,12 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
   // The show/hide options is not available on the mac.
   if (Utils.isMac()) return;
 
-  btnCalendars.visible = g_cache.getCalendarCount() > 0;
+  linkOptions.visible = g_cache.getCalendarCount() > 0;
   linkAddEvent.visible = g_cache.getCalendarCount() > 0;
   var tooltip = strings.OPTIONS_TOOLTIP;
   tooltip = tooltip.replace('[![USERNAME]!]',
       options.getValue(OPTIONS.MAIL));
-  btnCalendars.tooltip = tooltip;
+  linkOptions.tooltip = tooltip;
 };
 
 /**

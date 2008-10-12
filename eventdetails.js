@@ -272,7 +272,7 @@ EventDetails.prototype.fillDetailsView = function() {
     eventGuestsBg.visible = false;
     labelDescription.y = 115;
     eventDescription.y = 140;
-    eventDescription.height = 250;
+    eventDescription.height = 280;
   }
 
   if (!this.event.location) {

@@ -1,79 +1,76 @@
-﻿<view height="355" resizable="true" width="160" onopen="view_onOpen()">
-  <img name="base_topleft" src="images\base_topleft.png" />
-  <img name="base_topright" src="images\base_topright.png" />
-  <img name="base_bottomleft" src="images\base_bottomleft.png" />
-  <img name="base_bottomright" src="images\base_bottomright.png" />
-  <img name="base_top" src="images\base_top.png" />
-  <img name="base_left" src="images\base_left.png" />
-  <img name="base_right" src="images\base_right.png" />
-  <img name="base_bottom" src="images\base_bottom.png" />
-  <edit name="sizeCalc" visible="false" x="10" y="10" />
+﻿<view height="355" resizable="true" width="160" onopen="view_onOpen()"
+ >
+  <img name="base_topleft" src="images\base_topleft.png"/>
+  <img name="base_topright" src="images\base_topright.png"/>
+  <img name="base_bottomleft" src="images\base_bottomleft.png"/>
+  <img name="base_bottomright" src="images\base_bottomright.png"/>
+  <img name="base_top" src="images\base_top.png"/>
+  <img name="base_left" src="images\base_left.png"/>
+  <img name="base_right" src="images\base_right.png"/>
+  <img name="base_bottom" src="images\base_bottom.png"/>
+  <edit name="sizeCalc" visible="false" x="10" y="10"/>
   <div name="mainDiv">
-    <div name="background" background="#FFFFFF" />
-    <div name="agendaDiv" />
+    <div name="background" background="#FFFFFF"/>
+    <div name="agendaDiv"/>
     <div name="footerDiv">
-      <img name="footerLeft" src="images\footer_left.png" />
-      <img name="footerRight" src="images\footer_right.png" />
-      <div name="footerBg" background="images\footer_bg.png" />
+      <img name="footerLeft" src="images\footer_left.png"/>
+      <img name="footerRight" src="images\footer_right.png"/>
+      <div name="footerBg" background="images\footer_bg.png"/>
       <a height="16" name="linkAddEvent" y="6" color="#0065CD" font="Arial"
-        size="8" valign="middle">&ADD_EVENT;
+        valign="middle">&ADD_EVENT;
       </a>
-      <a height="16" name="linkToday" x="5" y="6" color="#0065CD" font="Arial"
-        size="8" valign="middle">&TODAY;
+      <a height="16" name="linkToday" y="6" color="#0065CD" font="Arial"
+        valign="middle">&TODAY;
       </a>
-      <button cursor="hand" height="18" name="btnCalendars" width="23" y="5"
-        downImage="images\footer_cal_over.png"
-        image="images\footer_cal_out.png"
-        overImage="images\footer_cal_over.png" />
+      <a height="16" name="linkOptions" y="6" color="#0065CD" font="Arial"
+        valign="middle">&OPTIONS_LINK;
+      </a>
     </div>
-    <div enabled="true" hitTest="htclient" name="miniCalendarDiv" />
-    <div enabled="true" hitTest="htclient" name="dayviewDiv" />
-    <div enabled="true" hitTest="htclient" name="dialogDiv" visible="false">
-      <img name="blueTopLeft" src="images/dayview_header_left.png" />
-      <div name="blueTopMiddle" background="images/month_nav_bg.png" />
-      <img name="blueTopRight" src="images/dayview_header_right.png" />
-      <img name="blueBottomLeft" src="images/blue_bottom_left.png" />
-      <img name="blueBottomRight" src="images/blue_bottom_right.png" />
-      <div name="blueBottomMiddle" background="images/blue_bottom_middle.png" />
-      <div name="dialogBg" background="#D6E9F8" />
+    <div enabled="true" hitTest="htclient" name="miniCalendarDiv"/>
+    <div enabled="true" hitTest="htclient" name="dayviewDiv"/>
+    <div enabled="true" hitTest="htclient" name="dialogDiv" visible="false"
+     >
+      <img name="blueTopLeft" src="images/dayview_header_left.png"/>
+      <div name="blueTopMiddle" background="images/month_nav_bg.png"/>
+      <img name="blueTopRight" src="images/dayview_header_right.png"/>
+      <img name="blueBottomLeft" src="images/blue_bottom_left.png"/>
+      <img name="blueBottomRight" src="images/blue_bottom_right.png"/>
+      <div name="blueBottomMiddle" background="images/blue_bottom_middle.png"/>
+      <div name="dialogBg" background="#D6E9F8"/>
       <div name="loginDiv">
-        <img name="loginIcon" x="3" y="-2" src="images/loginIcon.png" />
+        <img name="loginIcon" x="3" y="-2" src="images/loginIcon.png"/>
         <label name="signinTitle" font="arial" size="9">&SIGN_IN_TO_CALENDAR;
         </label>
         <label name="signinYour" font="arial" size="9">&YOUR;
         </label>
-        <img name="signinLogo" src="images/google_logo.png" />
+        <img name="signinLogo" src="images/google_logo.png"/>
         <label name="signinAccount" bold="true" font="arial" size="9">&ACCOUNT;
         </label>
         <div height="20" name="userBg" y="95" background="#7F9DB9">
-          <edit height="18" name="user" x="1" y="1" font="arial" />
+          <edit height="18" name="user" x="1" y="1" font="arial"/>
         </div>
         <div height="20" name="passBg" y="135" background="#7F9DB9">
-          <edit height="18" name="pass" x="1" y="1" font="arial"
-            passwordChar="*" />
+          <edit height="18" name="pass" x="1" y="1" font="arial" passwordChar="*"
+           />
         </div>
-        <label height="16" name="userLabel" width="100%" x="5" y="80" 
-          color="#0066CC" font="arial" size="9">&USERNAME;
+        <label height="16" name="userLabel" width="100%" x="5" y="80" color="#0066CC"
+          font="arial" size="9">&USERNAME;
         </label>
-        <label height="16" name="passLabel" width="87%" x="5" y="120"
-          color="#0066CC" font="arial" size="9">&PASSWORD;
+        <label height="16" name="passLabel" width="87%" x="5" y="120" color="#0066CC"
+          font="arial" size="9">&PASSWORD;
         </label>
         <img height="22" name="rememberFocus" width="22" visible="false"
-          x="5" y="162" src="images/checkbox_focus.png" />
-        <checkbox cursor="hand" height="16" name="remember" width="100%"
-          x="8" y="165" font="arial" size="9" trimming="word-ellipsis"
-          caption="&REMEMBER_ME;" value="false"
-          downImage="images/checkbox_default.png"
-          image="images/checkbox_default.png"
-          overImage="images/checkbox_default.png"
-          checkedDownImage="images/checkbox_checked.png"
-          checkedImage="images/checkbox_checked.png"
-          checkedOverImage="images/checkbox_checked.png" />
-        <button cursor="hand" height="24" name="login" width="84" y="185"
-          font="arial" size="8" caption="&LOGIN;"
-          downImage="images/action_down.png"
-          image="images/action_default.png"
-          overImage="images/action_hover.png" />
+          x="5" y="162" src="images/checkbox_focus.png"/>
+        <checkbox cursor="hand" height="16" name="remember" width="100%" x="8"
+          y="165" font="arial" size="9" trimming="word-ellipsis"
+          downImage="images/checkbox_default.png" image="images/checkbox_default.png"
+          overImage="images/checkbox_default.png" caption="&REMEMBER_ME;"
+          checkedDownImage="images/checkbox_checked.png" checkedImage="images/checkbox_checked.png"
+          checkedOverImage="images/checkbox_checked.png" value="false"
+         />
+        <button cursor="hand" height="24" name="login" width="84" y="185" font="arial"
+          downImage="images/action_down.png" image="images/action_default.png"
+          overImage="images/action_hover.png" caption="&LOGIN;"/>
         <label height="30" name="labelNoAccount" width="100%" x="0" y="220"
           align="center" font="arial" size="9" wordwrap="true"
          >&NO_ACCOUNT;
@@ -81,11 +78,11 @@
         <a height="16" name="newAccountLink" width="100%" x="0" y="250"
           align="center" font="arial" size="9">&CREATE_ACCOUNT;
         </a>
-        <img height="75" name="captchaImg" width="100%" visible="false"
-          x="0" y="80" />
-        <div height="18" name="captchaBg" width="100%" visible="false"
-          x="0" y="160" background="#7F9DB9">
-          <edit height="16" name="captcha" x="1" y="1" font="arial" />
+        <img height="75" name="captchaImg" width="100%" visible="false" x="0"
+          y="80"/>
+        <div height="18" name="captchaBg" width="100%" visible="false" x="0"
+          y="160" background="#7F9DB9">
+          <edit height="16" name="captcha" x="1" y="1" font="arial"/>
         </div>
       </div>
       <div name="optionsDiv" visible="false">
@@ -93,27 +90,23 @@
           bold="true" font="Arial" size="9" valign="middle"
           wordwrap="true">&OPTIONS_TITLE;
         </label>
-        <div height="1" name="sparator" width="100%" x="0" y="25"
-          background="#CACACA" />
+        <div height="1" name="sparator" width="100%" x="0" y="25" background="#CACACA"/>
         <div name="optionsFooter">
-          <img name="optionsFooterLeft" src="images\footer_left.png" />
-          <img name="optionsFooterRight" src="images\footer_right.png" />
-          <div name="optionsFooterBg" background="images\footer_bg.png" />
-          <a height="16" valign="middle" name="optionsClose" width="94%"
-            x="5" y="6" size="8" align="right" color="#0065CD" font="Arial">
-            &OPTIONS_CLOSE;
+          <img name="optionsFooterLeft" src="images\footer_left.png"/>
+          <img name="optionsFooterRight" src="images\footer_right.png"/>
+          <div name="optionsFooterBg" background="images\footer_bg.png"/>
+          <a height="16" name="optionsClose" width="93%" x="5" y="6" align="right"
+            color="#0065CD" font="Arial" valign="middle">&OPTIONS_CLOSE;
           </a>
         </div>
         <div name="calendarListDiv" x="5" y="35">
-          <listbox name="calendarList" x="0" y="0" background="#D6E9F8"
-            itemHeight="16" itemOverColor="#D6E9F8"
-            itemSelectedColor="#D6E9F8" />
+          <listbox name="calendarList" x="0" y="0" background="#D6E9F8" itemHeight="16"
+            itemOverColor="#D6E9F8" itemSelectedColor="#D6E9F8"/>
           <div name="calendarScroll" width="10" background="#CDCDD3">
-            <scrollbar enabled="true" height="115" width="8" lineStep="10"
-              name="calendar_sb" x="1" y="-10" hitTest="htclient"
-              orientation="vertical" thumbDownImage="images\scroll.png"
-              thumbImage="images\scroll.png"
-              thumbOverImage="images\scroll.png" />
+            <scrollbar enabled="true" height="115" hitTest="htclient" name="calendar_sb"
+              width="8" x="1" y="-10" lineStep="10" orientation="vertical"
+              thumbDownImage="images\scroll.png" thumbImage="images\scroll.png"
+              thumbOverImage="images\scroll.png"/>
           </div>
         </div>
       </div>

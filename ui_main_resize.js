@@ -145,25 +145,31 @@ CalendarGadget.prototype.resizeDesign = function() {
                    footerLeft.srcWidth / 2 -
                    footerRight.srcWidth / 2;
   footerBg.height = footerLeft.srcHeight;
-  sizeCalc.width = 100;
-  sizeCalc.font = linkToday.font;
-  sizeCalc.size = linkToday.size;
-  sizeCalc.bold = linkToday.bold;
-  sizeCalc.value = linkToday.innerText;
-  btnCalendars.visible = !Utils.isMac() && g_cache.getCalendarCount() > 0;
+  linkOptions.visible = !Utils.isMac() && g_cache.getCalendarCount() > 0;
   linkAddEvent.visible = !Utils.isMac() && g_cache.getCalendarCount() > 0;
-  btnCalendars.x = footerDiv.width - btnCalendars.width - footerRight.srcWidth;
-  if (Utils.isMac()) {
-    linkToday.width = footerBg.width;
-  } else {
-    linkToday.width = sizeCalc.idealBoundingRect.width;
-  }
-  linkAddEvent.x = (2 * linkToday.x) + linkToday.width;
-  linkAddEvent.width = btnCalendars.x.width - linkAddEvent.x;
 
   // The add Events feature is not available on the Mac.
   if (Utils.isMac()) {
-    linkAddEvent.visible = false;
+    linkToday.width = footerDiv.width - 2 * linkToday.x;
+  } else {
+    sizeCalc.width = 100;
+    sizeCalc.font = linkToday.font;
+    sizeCalc.size = 8;
+    sizeCalc.bold = linkToday.bold;
+    sizeCalc.value = linkToday.innerText;
+    linkToday.size = sizeCalc.size;
+    linkToday.width = sizeCalc.idealBoundingRect.width;
+    linkToday.x = 0;
+
+    sizeCalc.value = linkAddEvent.innerText;
+    linkAddEvent.size = sizeCalc.size;
+    linkAddEvent.x = linkToday.x + linkToday.width;
+    linkAddEvent.width = sizeCalc.idealBoundingRect.width;
+
+    sizeCalc.value = linkOptions.innerText;
+    linkOptions.size = sizeCalc.size;
+    linkOptions.width = sizeCalc.idealBoundingRect.width;
+    linkOptions.x = footerDiv.width - linkOptions.width;
   }
 
   resizeIndicator.x = mainDiv.width - resizeIndicator.srcWidth;
