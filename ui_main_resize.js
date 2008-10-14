@@ -159,7 +159,7 @@ CalendarGadget.prototype.resizeDesign = function() {
     sizeCalc.value = linkToday.innerText;
     linkToday.size = sizeCalc.size;
     linkToday.width = sizeCalc.idealBoundingRect.width;
-    linkToday.x = 0;
+    linkToday.x = 3;
 
     sizeCalc.value = linkAddEvent.innerText;
     linkAddEvent.size = sizeCalc.size;
@@ -169,7 +169,10 @@ CalendarGadget.prototype.resizeDesign = function() {
     sizeCalc.value = linkOptions.innerText;
     linkOptions.size = sizeCalc.size;
     linkOptions.width = sizeCalc.idealBoundingRect.width;
-    linkOptions.x = footerDiv.width - linkOptions.width;
+    linkOptions.x = footerDiv.width - linkOptions.width - linkToday.x;
+
+    linkOptions.visible =
+        !(linkOptions.x < linkAddEvent.x + linkAddEvent.width);
   }
 
   resizeIndicator.x = mainDiv.width - resizeIndicator.srcWidth;

@@ -206,13 +206,13 @@ Events.prototype.getEventsFromServer = function(calendar, startDate, endDate) {
   }
 
   var url = calendar.url +
-            '?start-min=' + Utils.getDateIso8601(startDate) +
-            '&start-max=' + Utils.getDateIso8601(endDate) +
-            // This will give us single events for recurring events and an 
-            // automatic purge for events which were moved out of recurring 
-            // events.
-            '&singleevents=true' +
-            '&max-results=500';  // Should give us all events
+      '?start-min=' + encodeURIComponent(Utils.getDateIso8601(startDate)) +
+      '&start-max=' + encodeURIComponent(Utils.getDateIso8601(endDate)) +
+      // This will give us single events for recurring events and an 
+      // automatic purge for events which were moved out of recurring 
+      // events.
+      '&singleevents=true' +
+      '&max-results=500';  // Should give us all events
 
   url = url.replace('http://', 'https://');
 
@@ -441,7 +441,8 @@ Events.prototype.getUpdatesFromServer = function(calendar) {
   calendar.lastUpdate.setSeconds(calendar.lastUpdate.getSeconds() + 1);
 
   var url = calendar.url +
-      '?updated-min=' + Utils.getDateIso8601(calendar.lastUpdate, true) +
+      '?updated-min=' +
+      encodeURIComponent(Utils.getDateIso8601(calendar.lastUpdate, true)) +
       // This will give us single events for recurring events and an 
       // automatic purge for events which were moved out of recurring 
       // events.

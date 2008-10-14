@@ -30,6 +30,32 @@ function EventDetails() {
   this.userZip = detailsViewData.getValue(OPTIONS.USERZIP);
 
   imgClose.onclick = Utils.bind(this.close, this);
+
+  // Apply custom scrollbars
+  var scrollbar;
+  scrollbar = eventDescription.scrollbar;
+  scrollbar.background = "images/scroll-bar.gif";
+  scrollbar.thumbImage = "images/scroll-track.gif";
+  scrollbar.thumbDownImage = "images/scroll-track-clicked.gif";
+  scrollbar.thumbOverImage = "images/scroll-track.gif";
+  scrollbar.rightImage = "images/scroll-down.gif";
+  scrollbar.rightDownImage = "images/scroll-down-clicked.gif";
+  scrollbar.rightOverImage = "images/scroll-down-over.gif";
+  scrollbar.leftImage = "images/scroll-up.gif";
+  scrollbar.leftDownImage = "images/scroll-up-clicked.gif";
+  scrollbar.leftOverImage = "images/scroll-up-over.gif";
+
+  scrollbar = guestList.scrollbar;
+  scrollbar.background = "images/scroll-bar.gif";
+  scrollbar.thumbImage = "images/scroll-track.gif";
+  scrollbar.thumbDownImage = "images/scroll-track-clicked.gif";
+  scrollbar.thumbOverImage = "images/scroll-track.gif";
+  scrollbar.rightImage = "images/scroll-down.gif";
+  scrollbar.rightDownImage = "images/scroll-down-clicked.gif";
+  scrollbar.rightOverImage = "images/scroll-down-over.gif";
+  scrollbar.leftImage = "images/scroll-up.gif";
+  scrollbar.leftDownImage = "images/scroll-up-clicked.gif";
+  scrollbar.leftOverImage = "images/scroll-up-over.gif";
 }
 
 /**

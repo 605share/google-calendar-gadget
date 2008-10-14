@@ -33,6 +33,18 @@ function AddEventDialog() {
 
   btnSave.onclick = Utils.bind(this.onSubmit, this);
   eventAllDay.onchange = Utils.bind(this.onAllDayChange, this);
+
+  var scrollbar = eventCalendar.scrollbar;
+  scrollbar.background = "images/scroll-bar.gif";
+  scrollbar.thumbImage = "images/scroll-track.gif";
+  scrollbar.thumbDownImage = "images/scroll-track-clicked.gif";
+  scrollbar.thumbOverImage = "images/scroll-track.gif";
+  scrollbar.rightImage = "images/scroll-down.gif";
+  scrollbar.rightDownImage = "images/scroll-down-clicked.gif";
+  scrollbar.rightOverImage = "images/scroll-down-over.gif";
+  scrollbar.leftImage = "images/scroll-up.gif";
+  scrollbar.leftDownImage = "images/scroll-up-clicked.gif";
+  scrollbar.leftOverImage = "images/scroll-up-over.gif";
 }
 
 /**
@@ -40,7 +52,7 @@ function AddEventDialog() {
  */
 AddEventDialog.prototype.COLORS = {
   ERROR_BG: '#D00000',
-  DEFAULT_BG: '#668CD9'
+  DEFAULT_BG: '#3D4AD9'
 };
 
 /**

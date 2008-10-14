@@ -17,13 +17,13 @@
       <img name="footerRight" src="images\footer_right.png"/>
       <div name="footerBg" background="images\footer_bg.png"/>
       <a height="16" name="linkAddEvent" y="6" color="#0065CD" font="Arial"
-        valign="middle">&ADD_EVENT;
+        size="10" valign="middle">&ADD_EVENT;
       </a>
       <a height="16" name="linkToday" y="6" color="#0065CD" font="Arial"
-        valign="middle">&TODAY;
+        size="10" valign="middle">&TODAY;
       </a>
       <a height="16" name="linkOptions" y="6" color="#0065CD" font="Arial"
-        valign="middle">&OPTIONS_LINK;
+        size="10" valign="middle">&OPTIONS_LINK;
       </a>
     </div>
     <div enabled="true" hitTest="htclient" name="miniCalendarDiv"/>
@@ -69,7 +69,7 @@
           checkedOverImage="images/checkbox_checked.png" value="false"
          />
         <button cursor="hand" height="24" name="login" width="84" y="185" font="arial"
-          downImage="images/action_down.png" image="images/action_default.png"
+          size="10" downImage="images/action_down.png" image="images/action_default.png"
           overImage="images/action_hover.png" caption="&LOGIN;"/>
         <label height="30" name="labelNoAccount" width="100%" x="0" y="220"
           align="center" font="arial" size="9" wordwrap="true"
@@ -96,7 +96,8 @@
           <img name="optionsFooterRight" src="images\footer_right.png"/>
           <div name="optionsFooterBg" background="images\footer_bg.png"/>
           <a height="16" name="optionsClose" width="93%" x="5" y="6" align="right"
-            color="#0065CD" font="Arial" valign="middle">&OPTIONS_CLOSE;
+            color="#0065CD" font="Arial" size="8" valign="middle"
+           >&OPTIONS_CLOSE;
           </a>
         </div>
         <div name="calendarListDiv" x="5" y="35">

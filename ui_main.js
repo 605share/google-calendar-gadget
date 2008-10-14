@@ -35,7 +35,7 @@ function CalendarGadget() {
 /**
  * Constants for the minimum size of the gadget.
  */
-CalendarGadget.prototype.GADGET_MIN_WIDTH = 150;
+CalendarGadget.prototype.GADGET_MIN_WIDTH = 135;
 CalendarGadget.prototype.GADGET_MIN_HEIGHT = 155;
 
 /**
@@ -256,6 +256,8 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
   if (Utils.isMac()) return;
 
   linkOptions.visible = g_cache.getCalendarCount() > 0;
+  linkOptions.visible =
+        !(linkOptions.x < linkAddEvent.x + linkAddEvent.width);
   linkAddEvent.visible = g_cache.getCalendarCount() > 0;
   var tooltip = strings.OPTIONS_TOOLTIP;
   tooltip = tooltip.replace('[![USERNAME]!]',
