@@ -1,4 +1,4 @@
-﻿// Copyright 2008 Google Inc.
+// Copyright 2008 Google Inc.
 // All Rights Reserved.
 
 // @fileoverview Utilities.
@@ -320,12 +320,10 @@ Utils.createXhr = function() {
   var xhr;
 
   try {
-    xhr = framework.google.betaXmlHttpRequest();
+    xhr = framework.google.betaXmlHttpRequest2();
   } catch (e) {
     xhr = new XMLHttpRequest();
   }
-
-  // xhr = new XMLHttpRequest();
 
   return xhr;
 };
