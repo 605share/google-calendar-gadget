@@ -563,8 +563,10 @@ Events.prototype.addNewEvent = function(event) {
   addEntry += ' xmlns:gd="http://schemas.google.com/g/2005">\n';
   addEntry += '<category scheme="http://schemas.google.com/g/2005#kind" ';
   addEntry += ' term="http://schemas.google.com/g/2005#event"></category>\n';
-  addEntry += '<title type="text">' + event.title + '</title>\n';
-  addEntry += '<content type="text">' + event.desc + '</content>\n';
+  addEntry += '<title type="text">' + Utils.cleanXml(event.title) +
+      '</title>\n';
+  addEntry += '<content type="text">' + Utils.cleanXml(event.desc) +
+      '</content>\n';
   addEntry += '<gd:transparency ';
   addEntry += 'value="http://schemas.google.com/g/2005#event.opaque">';
   addEntry += '</gd:transparency>\n';
@@ -572,7 +574,8 @@ Events.prototype.addNewEvent = function(event) {
   addEntry += ' value="http://schemas.google.com/g/2005#event.confirmed">';
   addEntry += '</gd:eventStatus>\n';
   if (event.location) {
-    addEntry += '<gd:where valueString="' + event.location + '"></gd:where>\n';
+    addEntry += '<gd:where valueString="' + Utils.cleanXml(event.location) +
+        '"></gd:where>\n';
   }
   addEntry += '<gd:when ';
   var allDay = event.isAllDay;
@@ -603,7 +606,8 @@ Events.prototype.addNewEvent = function(event) {
 Events.prototype.addQuickEvent = function(text) {
   var quickAddEntry = '<entry xmlns="http://www.w3.org/2005/Atom" ';
   quickAddEntry += 'xmlns:gCal="http://schemas.google.com/gCal/2005">\n';
-  quickAddEntry += '<content type="html">' + text + '</content>\n';
+  quickAddEntry += '<content type="html">' + Utils.cleanXml(text) +
+      '</content>\n';
   quickAddEntry += '<gCal:quickadd value="true"/>\n';
   quickAddEntry += '</entry>';
 

@@ -218,9 +218,6 @@ Auth.prototype.getSuperToken = function() {
       '&service=gaia' +
       '&Session=false';
 
-  // Abort request after 1 second if we didn't get a response by then.
-  setTimeout(req.abort(), 1000);
-
   req.send(postData);
 
   if (req.status != 200) {

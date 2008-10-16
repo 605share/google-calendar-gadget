@@ -392,7 +392,7 @@ Utils.isMac = function() {
  */
 Utils.isLinux = function() {
   return framework.runtime.osName == 'Linux';
-}
+};
 
 /**
  * Detect if we are running on a Linux machine.
@@ -400,4 +400,19 @@ Utils.isLinux = function() {
  */
 Utils.isWindows = function() {
   return framework.runtime.osName.match(/windows/i) != null;
-}
+};
+
+/**
+ * Clean XML Data to generate valid xml text
+ * @param {string} str Input string
+ * @return {string} Cleaned output
+ */
+Utils.cleanXml = function(str) {
+  str = str.replace(/&/g, '&amp;');
+  str = str.replace(/&amp;amp;/g, '&amp;');
+  str = str.replace(/</g, '&lt;');
+  str = str.replace(/>/g, '&gt;');
+  str = str.replace(/\'/g, '&apos;');
+  str = str.replace(/"/g, '&quot;');
+  return str;
+};
