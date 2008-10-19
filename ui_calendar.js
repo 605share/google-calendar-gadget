@@ -170,6 +170,7 @@ MiniCalendar.prototype.drawMonthHeader = function() {
   monthLabel.size = 10;
   monthLabel.font = 'Arial';
   monthLabel.enabled = true;
+  monthLabel.trimming = 'character-ellipsis';
   var labelTxt = strings.MONTH_YEAR_HEADER;
   labelTxt = labelTxt.replace('[![MONTH]!]', MONTHS[this.getCurrentMonth()]);
   labelTxt = labelTxt.replace('[![YEAR]!]', this.getCurrentYear());

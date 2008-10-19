@@ -14,8 +14,9 @@ function Auth() {
   if (this.authToken_.length == 0) {
     this.authToken_ = null;
   }
-  this.lsid_ = options.getValue(OPTIONS.LSID);
-  this.sid_ = options.getValue(OPTIONS.SID);
+  // Removing storing of LSID and SID for now.
+  //this.lsid_ = options.getValue(OPTIONS.LSID);
+  //this.sid_ = options.getValue(OPTIONS.SID);
 
   this.retries = 0;
 }
@@ -166,8 +167,9 @@ Auth.prototype.onLoginDone = function(req) {
     debug.trace('User successfully verified.');
     // Store authentication data
     this.authToken_ = responseData.Auth;
-    this.lsid_ = responseData.LSID;
-    this.sid_ = responseData.SID;
+    // Removing storing of LSID and SID for now.
+    //this.lsid_ = responseData.LSID;
+    //this.sid_ = responseData.SID;
 
     if (typeof(this.onLoginSuccess) == 'function') {
       this.onLoginSuccess(this);
@@ -177,11 +179,12 @@ Auth.prototype.onLoginDone = function(req) {
       options.putValue(OPTIONS.PASSWORD, '');
     } else {
       options.encryptValue(OPTIONS.AUTH);
-      options.encryptValue(OPTIONS.LSID);
-      options.encryptValue(OPTIONS.SID);
+      // Removing storing of LSID and SID for now.
+      //options.encryptValue(OPTIONS.LSID);
+      //options.encryptValue(OPTIONS.SID);
       options.putValue(OPTIONS.AUTH, this.authToken_);
-      options.putValue(OPTIONS.LSID, this.lsid_);
-      options.putValue(OPTIONS.SID, this.sid_);
+      //options.putValue(OPTIONS.LSID, this.lsid_);
+      //options.putValue(OPTIONS.SID, this.sid_);
     }
   } else if (req.status == 403) {
     if (this.authResponse.Error != this.CAPTCHA_REQUIRED) {
@@ -204,6 +207,9 @@ Auth.prototype.onLoginDone = function(req) {
  * @return {String} Authentication token
  */
 Auth.prototype.getSuperToken = function() {
+  // Removing storing of LSID and SID for now.
+  return null;
+
   if (!this.authToken_) {
     return null;
   }

@@ -101,9 +101,9 @@ CalendarGadget.prototype.run = function() {
   newAccountLink.href = 'https://www.google.com/accounts/NewAccount' +
       '?service=cl&passive=true&nui=1' +
       '&continue=' +
-      encodeURIComponent('http://www.google.com/calendar/render?tab=wc') +
+      encodeURIComponent('https://www.google.com/calendar/render?tab=wc') +
       '&followup=' +
-      encodeURIComponent('http://www.google.com/calendar/render?tab=wc');
+      encodeURIComponent('https://www.google.com/calendar/render?tab=wc');
   this.resize();
 };
 
