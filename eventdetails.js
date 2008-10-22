@@ -390,9 +390,8 @@ EventDetails.prototype.onGoingResponse = function() {
   req.send(elem.xml);
 
   // Return from function if we cannot successfully set the new event.
-  // Return from function if we cannot successfully set the new event.
   if (req.status != 200) {
-    g_errorMessage.displayError(strings.ERROR_RSVP_RESPONSE);
+    g_errorMessage.displayMessage(strings.ERROR_RSVP_RESPONSE);
     return;
   }
 
