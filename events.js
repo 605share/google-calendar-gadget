@@ -109,6 +109,9 @@ Events.prototype.onGetUserCalendars = function(req) {
   } else if (req.status == 401) {
     g_auth.clearAuthToken();
     g_auth.login();
+  } else if (req.status == 403) {
+    g_calendarGadget.showErrorMsg(strings.ERROR_ACCOUNT_DISABLED_OR_DELETED);
+    g_auth.login();
   } else if (req.status == 200) {
     var responseText = req.responseText;
 
@@ -118,7 +121,7 @@ Events.prototype.onGetUserCalendars = function(req) {
     var feed = doc.getElementsByTagName('feed');
     if (!feed || feed.length == 0) {
       // no <feed> element
-      Utils.showErrorMsg(ERROR_EMPTY_FEED);
+      g_calendarGadget.showErrorMsg(ERROR_EMPTY_FEED);
       return;
     }
 
