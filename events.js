@@ -445,9 +445,9 @@ Events.prototype.getUpdatesFromServer = function(calendar) {
 
   var url = calendar.url +
       '?updated-min=' +
-      encodeURIComponent(Utils.getDateIso8601(calendar.lastUpdate)) +
-      // This will give us single events for recurring events and an 
-      // automatic purge for events which were moved out of recurring 
+      encodeURIComponent(Utils.getDateIso8601(calendar.lastUpdate, true)) +
+      // This will give us single events for recurring events and an
+      // automatic purge for events which were moved out of recurring
       // events.
       '&singleevents=true' +
       '&max-results=500';  // Should give us all events

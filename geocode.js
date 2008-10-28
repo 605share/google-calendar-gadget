@@ -67,19 +67,9 @@ GeoCode.prototype.onReadyStateChange = function(req) {
   if (req.status == 200) {
     // Read JSON data into geoData attribute.
     try {
-      var text = req.responseText;
-      // Check for vald json input.
-      // Code for check from http://www.json.org/json2.js
-      if (/^[\],:{}\s]*$/.
-        test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
-        replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-        replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-        this.geoData = eval('(' + text + ')');
-      } else {
-        debug.error('Corrupt JSON data.');
-      }
+      this.geoData = jsonParse(req.responseText);
     } catch (e) {
-      debug.error('Invalid data in JSON structure. eval failed');
+      debug.error('Invalid data in JSON structure. Parse failed');
       this.geoData = null;
       return;
     }

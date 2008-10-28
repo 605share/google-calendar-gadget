@@ -65,6 +65,7 @@
   <script src="constants.js" />
   <script src="eventdetails.js" />
   <script src="geocode.js" />
+  <script src="json_sans_eval.js" />
   <script src="utils.js" />
   <script src="auth.js" />
   <script src="errorMessage.js" />

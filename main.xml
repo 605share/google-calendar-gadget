@@ -123,6 +123,7 @@
   <script src="errorMessage.js" />
   <script src="events.js" />
   <script src="geocode.js" />
+  <script src="json_sans_eval.js" />
   <script src="utils.js" />
   <script src="ui_agenda.js" />
   <script src="ui_calendar.js" />
