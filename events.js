@@ -112,7 +112,7 @@ Events.prototype.onGetUserCalendars = function(req) {
   } else if (req.status == 403) {
     g_calendarGadget.showErrorMsg(strings.ERROR_ACCOUNT_DISABLED_OR_DELETED);
     g_auth.clearAuthToken();
-    g_calendarGadget.showLogin(null, true);
+    g_calendarGadget.showLogin();
   } else if (req.status == 200) {
     var responseText = req.responseText;
 
