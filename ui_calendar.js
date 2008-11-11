@@ -104,6 +104,8 @@ MiniCalendar.prototype.draw = function() {
   this.drawMonthHeader();
   this.drawWeekHeader();
   this.drawWeeks();
+
+  this.target_.focus();
 };
 
 /**
