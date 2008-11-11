@@ -92,6 +92,7 @@ CalendarGadget.prototype.resizeAgenda = function() {
   agendaDiv.y = 0;
   agendaDiv.height = footerDiv.y - agendaDiv.y;
   agendaDiv.width = mainDiv.width;
+  agendaDiv.visible = true;
   g_uiAgenda.draw();
 };
 
