@@ -25,8 +25,6 @@ function EventDetails() {
   this.event = detailsViewData.getValue(OPTIONS.EVENT);
   this.calendar = detailsViewData.getValue(OPTIONS.CALENDAR);
   this.authToken = detailsViewData.getValue(OPTIONS.AUTH);
-  this.sid = detailsViewData.getValue(OPTIONS.SID);
-  this.lsid = detailsViewData.getValue(OPTIONS.LSID);
   this.userZip = detailsViewData.getValue(OPTIONS.USERZIP);
 
   imgClose.onclick = Utils.bind(this.close, this);

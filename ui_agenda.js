@@ -550,8 +550,6 @@ Agenda.prototype.onEventClicked = function(event) {
   var cal = g_cache.getCalendarByID(event.calendarId);
   detailsData.putValue(OPTIONS.CALENDAR, cal);
   detailsData.putValue(OPTIONS.AUTH, g_auth.getAuthToken());
-  detailsData.putValue(OPTIONS.SID, g_auth.getAuthToken());
-  detailsData.putValue(OPTIONS.LSID, g_auth.getAuthToken());
   try {
     detailsData.putValue(OPTIONS.USERZIP, google.pers.data.getZipCode());
   } catch (e) {

@@ -14,9 +14,6 @@ function Auth() {
   if (this.authToken_.length == 0) {
     this.authToken_ = null;
   }
-  // Removing storing of LSID and SID for now.
-  //this.lsid_ = options.getValue(OPTIONS.LSID);
-  //this.sid_ = options.getValue(OPTIONS.SID);
 
   this.retries = 0;
 }
@@ -167,9 +164,6 @@ Auth.prototype.onLoginDone = function(req) {
     debug.trace('User successfully verified.');
     // Store authentication data
     this.authToken_ = responseData.Auth;
-    // Removing storing of LSID and SID for now.
-    //this.lsid_ = responseData.LSID;
-    //this.sid_ = responseData.SID;
 
     if (typeof(this.onLoginSuccess) == 'function') {
       this.onLoginSuccess(this);
@@ -179,12 +173,7 @@ Auth.prototype.onLoginDone = function(req) {
       options.putValue(OPTIONS.PASSWORD, '');
     } else {
       options.encryptValue(OPTIONS.AUTH);
-      // Removing storing of LSID and SID for now.
-      //options.encryptValue(OPTIONS.LSID);
-      //options.encryptValue(OPTIONS.SID);
       options.putValue(OPTIONS.AUTH, this.authToken_);
-      //options.putValue(OPTIONS.LSID, this.lsid_);
-      //options.putValue(OPTIONS.SID, this.sid_);
     }
   } else if (req.status == 403) {
     if (this.authResponse.Error != this.CAPTCHA_REQUIRED) {
@@ -198,37 +187,5 @@ Auth.prototype.onLoginDone = function(req) {
     if (typeof(this.onLoginFailure) == 'function') {
       this.onLoginFailure(this);
     }
-  }
-};
-
-/**
- * Retrieve super token for a redirect if user is not logged in or
- * currently logged in with a differen account.
- * @return {String} Authentication token
- */
-Auth.prototype.getSuperToken = function() {
-  // Removing storing of LSID and SID for now.
-  return null;
-
-  if (!this.authToken_) {
-    return null;
-  }
-  var req = Utils.createXhr();
-  req.open('POST', 'https://www.google.com/accounts/IssueAuthToken', false);
-  req.setRequestHeader('Content-type',
-      'application/x-www-form-urlencoded; charset=UTF-8');
-  req.setRequestHeader('User-agent', 'Google Calendar Gadget');
-
-  var postData = 'SID=' + this.sid_ +
-      '&LSID=' + this.lsid_ +
-      '&service=gaia' +
-      '&Session=false';
-
-  req.send(postData);
-
-  if (req.status != 200) {
-    return null;
-  } else {
-    return req.responseText;
   }
 };
