@@ -360,18 +360,8 @@ Utils.forceHttpsUrl = function(url) {
 };
 
 Utils.redirectWithSuperAuth = function(url) {
-  var auth = new Auth();
-  var token = auth.getSuperToken();
-  if (token != null) {
-    var goUrl = 'https://www.google.com/accounts/TokenAuth' +
-        '?auth=' + encodeURIComponent(token) +
-        '&service=cl' +
-        '&continue=' + encodeURIComponent(url) +
-        '&source=' + encodeURIComponent(GOOGLE_CLIENT);
-    framework.openUrl(goUrl);
-  } else {
-    framework.openUrl(url);
-  }
+  // We lied. There is no super auth.
+  framework.openUrl(url);
 };
 
 /**
