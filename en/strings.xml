@@ -6,8 +6,11 @@ Copyright (c) 2008 Google Inc. All Rights Reserved.
 The next version of the popular calendar gadget. 
 Compact and stylish new interface and packed with more features.
 
-This is a Beta release and might contain bugs. If you find any please report 
-them to calendargadget-feedback@google.com or file and assign them to matrix.
+Licensed under the Apache License, Version 2.0
+http://www.apache.org/licenses/LICENSE-2.0
+
+This gadget was created by Google and is maintained by the open-source community
+http://code.google.com/p/google-calendar-gadget/
 </GADGET_ABOUT_TEXT>
   <GADGET_VERSION>3.0.0.0</GADGET_VERSION>
 
