@@ -102,6 +102,9 @@ Calendar.prototype.parse = function(elem) {
       this.color = node.getAttribute('value');
     } else if (node.nodeName == 'gCal:accesslevel') {
       this.accessLevel = node.getAttribute('value');
+      if (this.accessLevel != 'owner') {
+        options.putDefaultValue(OPTIONS.SHOW + this.id, false);
+      }
     } else if (node.nodeName == 'gCal:selected') {
       this.selected = (node.getAttribute('value') != 'false');
     } else if (node.nodeName == 'gCal:timezone') {
