@@ -1,10 +1,10 @@
 ﻿<strings>
-  <GADGET_NAME>Google Calendar Beta</GADGET_NAME>
+  <GADGET_NAME>Google Calendar</GADGET_NAME>
   <GADGET_DESCRIPTION>Google Calendar on your desktop</GADGET_DESCRIPTION>
-  <GADGET_ABOUT_TEXT>Google Calendar Beta
+  <GADGET_ABOUT_TEXT>Google Calendar
 Copyright (c) 2008 Google Inc. All Rights Reserved.
-The next version of the popular calendar gadget. 
-Compact and stylish new interface and packed with more features.
+Keep track of your calendar events.
+Choose between month view, daily view, and agenda view.
 
 Licensed under the Apache License, Version 2.0
 http://www.apache.org/licenses/LICENSE-2.0
@@ -38,7 +38,7 @@ It's easy to start.</NO_ACCOUNT>
   <REFRESH>Refresh</REFRESH>
   <VISIT_CALENDAR>Go to Google Calendar online</VISIT_CALENDAR>
 
-  <!-- Text for the add event dialog. Example should match the one shown in 
+  <!-- Text for the add event dialog. Example should match the one shown in
        the online Google calendar  -->
   <ADD_EVENT>Add event</ADD_EVENT>
   <ADD_EVENT_WHAT>What</ADD_EVENT_WHAT>
@@ -63,7 +63,7 @@ It's easy to start.</NO_ACCOUNT>
   <QUICK_ADD_EXAMPLE>Example: Dinner with Michael 7pm tomorrow</QUICK_ADD_EXAMPLE>
   <EMPTY_QUICKADD>Please enter your event using the form: </EMPTY_QUICKADD>
 
-  <!-- Week days in different lengts. Very short for calendar header, 
+  <!-- Week days in different lengts. Very short for calendar header,
        medium (3-letter) appreviation and full names -->
   <DAY_MON_S>M</DAY_MON_S>
   <DAY_TUE_S>Tu</DAY_TUE_S>
