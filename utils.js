@@ -345,6 +345,21 @@ Utils.createDOM = function() {
 };
 
 /**
+ * Create DOMDocument object from a completed XHR.
+ * @return {DOMDocument} A DOMDocument representation of the XML.
+ */
+Utils.createXmlDocument = function(request) {
+  if (Utils.isWindows()) {
+    var doc = Utils.createDOM();
+    doc.loadXML(request.responseText);
+
+    return doc;
+  } else {
+    return request.responseXML;
+  }
+}
+
+/**
  * Check if user is currently connected to the internet
  * @return {boolean} True, if connected.
  */

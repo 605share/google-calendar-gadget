@@ -342,8 +342,7 @@ EventDetails.prototype.onGoingResponse = function() {
   if (req.status != 200) return;
 
   // Load the response into a DOMDocument
-  var doc = Utils.createDOM();
-  doc.loadXML(req.responseText);
+  var doc = Utils.createXmlDocument(req);
 
   // Extract entry elements. We should have one element in there.
   var elem = doc.getElementsByTagName('entry');

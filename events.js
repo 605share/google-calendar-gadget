@@ -114,11 +114,7 @@ Events.prototype.onGetUserCalendars = function(req) {
     g_auth.clearAuthToken();
     g_calendarGadget.showLogin();
   } else if (req.status == 200) {
-    var responseText = req.responseText;
-
-    var doc = Utils.createDOM();
-    doc.loadXML(responseText);
-
+    var doc = Utils.createXmlDocument(req);
     var feed = doc.getElementsByTagName('feed');
     if (!feed || feed.length == 0) {
       // no <feed> element
@@ -258,17 +254,13 @@ Events.prototype.onReceiveEvents = function(req, calendar, startDate, endDate) {
     this.setCalendarMinutes(calendar, true);
     this.resetLastRetry();
 
-    var responseText = req.responseText;
-
-    var doc = Utils.createDOM();
-
     for (var d = new Date(startDate);
          !Utils.checkSameDay(d, endDate);
          d.setDate(d.getDate() + 1)) {
       g_cache.setEventsForCalendar(calendar, d, []);
     }
 
-    doc.loadXML(responseText);
+    var doc = Utils.createXmlDocument(req);
     var feed = doc.getElementsByTagName('feed');
     if (!feed || feed.length == 0) {
       // no <feed> element
@@ -478,11 +470,7 @@ Events.prototype.onReceiveUpdates = function(req, calendar) {
   if (req.status == 200) {
     this.setCalendarMinutes(calendar, true);
 
-    var responseText = req.responseText;
-
-    var doc = Utils.createDOM();
-
-    doc.loadXML(responseText);
+    var doc = Utils.createXmlDocument(req);
     var feed = doc.getElementsByTagName('feed');
     if (!feed || feed.length == 0) {
       // no <feed> element
