@@ -83,38 +83,63 @@ Calendar.prototype.getUpdateDate = function() {
  */
 Calendar.prototype.parse = function(elem) {
   for (var node = elem.firstChild; node != null; node = node.nextSibling) {
-    if (node.nodeName == 'id') {
-      this.id = node.firstChild ? node.firstChild.nodeValue : MSG_NO_TITLE;
-    } else if (node.nodeName == 'title') {
-      this.title = node.firstChild ? node.firstChild.nodeValue : MSG_NO_TITLE;
-    } else if (node.nodeName == 'author') {
-      for (var i = 0; i < node.childNodes.length; ++i) {
-        if (node.childNodes[i].nodeName == 'email') {
-          this.email = node.childNodes[1].firstChild.nodeValue;
-        }
-      }
-    } else if (node.nodeName == 'link' &&
-               node.getAttribute('rel') == 'alternate') {
-      var url = node.getAttribute('href');
-      url = Utils.forceHttpsUrl(url);
-      this.url = url;
-    } else if (node.nodeName == 'gCal:color') {
-      this.color = node.getAttribute('value');
-    } else if (node.nodeName == 'gCal:accesslevel') {
-      this.accessLevel = node.getAttribute('value');
-      if (this.accessLevel != 'owner') {
-        options.putDefaultValue(OPTIONS.SHOW + this.id, false);
-      }
-    } else if (node.nodeName == 'gCal:selected') {
-      this.selected = (node.getAttribute('value') != 'false');
-    } else if (node.nodeName == 'gCal:timezone') {
-      this.timezone = node.getAttribute('value');
-    } else if (node.nodeName == 'gCal:hidden') {
-      this.hidden = (node.getAttribute('value') != 'false');
-    } else if (node.nodeName == 'updated' && node.firstChild) {
-      this.updated = Utils.rfc3339StringToDate(node.firstChild.nodeValue);
-    } else if (node.nodeName == 'gCal:overridename') {
-      this.overrideName = node.getAttribute('value');
+    var nodeName = node.nodeName;
+    switch (nodeName) {
+      case 'id':
+          if (node.firstChild) {
+            this.id = node.firstChild.nodeValue;
+          } else {
+            this.id = MSG_NO_TITLE;
+          }
+          break;
+      case 'title':
+          if (node.firstChild) {
+            this.title = node.firstChild.nodeValue;
+          } else {
+            this.title = MSG_NO_TITLE;
+          }
+          break;
+      case 'author':
+          for (var i = 0; i < node.childNodes.length; ++i) {
+            if (node.childNodes[i].nodeName == 'email') {
+              this.email = node.childNodes[1].firstChild.nodeValue;
+            }
+          }
+          break;
+      case 'link':
+          if (node.getAttribute('rel') == 'alternate') {
+            var url = node.getAttribute('href');
+            url = Utils.forceHttpsUrl(url);
+            this.url = url;
+          }
+          break;
+      case 'gCal:color':
+          this.color = node.getAttribute('value');
+          break;
+      case 'gCal:accesslevel':
+          this.accessLevel = node.getAttribute('value');
+          if (this.accessLevel != 'owner') {
+            options.putDefaultValue(OPTIONS.SHOW + this.id, false);
+          }
+          break;
+      case 'gCal:selected':
+          this.selected = (node.getAttribute('value') != 'false');
+          break;
+      case 'gCal:timezone':
+          this.timezone = node.getAttribute('value');
+          break;
+      case 'gCal:hidden':
+          this.hidden = (node.getAttribute('value') != 'false');
+          break;
+      case 'updated':
+          if (node.firstChild) {
+            this.updated =
+                Utils.rfc3339StringToDate(node.firstChild.nodeValue);
+          }
+          break;
+      case 'gCal:overridename':
+          this.overrideName = node.getAttribute('value');
+          break;
     }
   }
 };

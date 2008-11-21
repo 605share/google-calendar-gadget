@@ -93,101 +93,123 @@ CalendarEvent.prototype.clone = function() {
  */
 CalendarEvent.prototype.parse = function(elem) {
   for (var node = elem.firstChild; node != null; node = node.nextSibling) {
-    if (node.nodeName == 'gCal:uid') {
-      this.id = node.getAttribute('value');
-    } else if (node.nodeName == 'title') {
-      this.title = node.firstChild ? node.firstChild.nodeValue : MSG_NO_TITLE;
-    } else if (node.nodeName == 'gd:when') {
-      var startString = node.getAttribute('startTime');
-      this.startTime = Utils.rfc3339StringToDate(startString);
-      this.endTime = Utils.rfc3339StringToDate(node.getAttribute('endTime'));
-      this.isAllDay = startString.match(Utils.DATE_REGEX);
-      for (var i = 0; i < node.childNodes.length; ++i) {
-        if (node.childNodes[i].nodeName == 'gd:reminder') {
-          // We are only interested in alert reminders and will only check for 
-          // short term (minutes) reminders.
-          if (node.childNodes[i].getAttribute('method') == 'alert') {
-            var rem = parseInt(node.childNodes[i].getAttribute('minutes'));
-            if (isNaN(rem)) {
-              this.reminder = -1;
-            } else {
-              this.reminder = rem;
+    var nodeName = node.nodeName;
+    switch (nodeName) {
+      case 'gCal:uid':
+          this.id = node.getAttribute('value');
+          break;
+      case 'title':
+          if (node.firstChild) {
+            this.title = node.firstChild.nodeValue;
+          } else {
+            this.title = MSG_NO_TITLE;
+          }
+          break;
+      case 'gd:when':
+          var startString = node.getAttribute('startTime');
+          this.startTime = Utils.rfc3339StringToDate(startString);
+          this.endTime =
+              Utils.rfc3339StringToDate(node.getAttribute('endTime'));
+          this.isAllDay = startString.match(Utils.DATE_REGEX);
+          for (var i = 0; i < node.childNodes.length; ++i) {
+            if (node.childNodes[i].nodeName == 'gd:reminder') {
+              // We are only interested in alert reminders and will only check
+              // for short term (minutes) reminders.
+              if (node.childNodes[i].getAttribute('method') == 'alert') {
+                var rem = parseInt(node.childNodes[i].getAttribute('minutes'));
+                if (isNaN(rem)) {
+                  this.reminder = -1;
+                } else {
+                  this.reminder = rem;
+                }
+              }
+           }
+          }
+          break;
+      case 'gd:where':
+          this.location = node.getAttribute('valueString');
+          break;
+      case 'gd:who':
+          if (node.firstChild) {
+            var attendee = new Attendee(node.getAttribute('valueString'),
+                node.getAttribute('email'));
+            switch (node.firstChild.getAttribute('value')) {
+              case 'http://schemas.google.com/g/2005#event.accepted':
+                  this.attendees.yes.push(attendee);
+                  break;
+              case 'http://schemas.google.com/g/2005#event.declined':
+                  this.attendees.no.push(attendee);
+                  break;
+              case 'http://schemas.google.com/g/2005#event.invited':
+                  this.attendees.waiting.push(attendee);
+                  break;
+              case 'http://schemas.google.com/g/2005#event.tentative':
+                  this.attendees.maybe.push(attendee);
+                  break;
             }
           }
-        }
-      }
-    } else if (node.nodeName == 'gd:where') {
-      this.location = node.getAttribute('valueString');
-    } else if (node.nodeName == 'gd:who') {
-      if (node.firstChild) {
-        var attendee = new Attendee(node.getAttribute('valueString'),
-            node.getAttribute('email'));
-
-        switch (node.firstChild.getAttribute('value')) {
-          case 'http://schemas.google.com/g/2005#event.accepted':
-              this.attendees.yes.push(attendee);
-              break;
-          case 'http://schemas.google.com/g/2005#event.declined':
-              this.attendees.no.push(attendee);
-              break;
-          case 'http://schemas.google.com/g/2005#event.invited':
-              this.attendees.waiting.push(attendee);
-              break;
-          case 'http://schemas.google.com/g/2005#event.tentative':
-              this.attendees.maybe.push(attendee);
-              break;
-        }
-      }
-      if (this.attendees.yes.length +
-          this.attendees.no.length +
-          this.attendees.maybe.length +
-          this.attendees.waiting.length > 0) {
-        this.rsvp = true;
-      }
-      if (node.getAttribute('rel') ==
-          'http://schemas.google.com/g/2005#event.organizer') {
-        this.organizer = node.getAttribute('valueString');
-      }
-    } else if (node.nodeName == 'gd:recurrence') {
-      this.recur = true;
-    } else if (node.nodeName == 'gd:eventStatus') {
-      switch (node.getAttribute('value')) {
-        case 'http://schemas.google.com/g/2005#event.canceled':
-            this.status = this.STATUS_CANCELED;
-            break;
-        case 'http://schemas.google.com/g/2005#event.confirmed':
-            this.status = this.STATUS_CONFIRMED;
-            break;
-        case 'http://schemas.google.com/g/2005#event.tentative':
-            this.status = this.STATUS_TENTATIVE;
-            break;
-      }
-    } else if (node.nodeName == 'content' && node.firstChild) {
-      this.desc = node.firstChild.nodeValue;
-    } else if (node.nodeName == 'gd:originalEvent') {
-      this.originalId = node.getAttribute('id');
-    } else if (node.nodeName == 'author') {
-      if (node.firstChild.nodeName == 'name') {
-        this.creator = node.firstChild.firstChild.nodeValue;
-      }
-    } else if (node.nodeName == 'link') {
-      var url = node.getAttribute('href');
-      url = Utils.forceHttpsUrl(url);
-      switch (node.getAttribute('rel')) {
-        case 'alternate':
-            this.alternateUrl = url;
-            break;
-        case 'self':
-            this.selfUrl = url;
-            break;
-        case 'edit':
-            this.editUrl = url;
-            break;
-      }
-    } else if (node.nodeName == 'updated') {
-      this.updated = Utils.rfc3339StringToDate(node.firstChild.nodeValue);
-    } else if (node.nodeName == 'published') {
-      this.published = Utils.rfc3339StringToDate(node.firstChild.nodeValue);
+          if (this.attendees.yes.length +
+              this.attendees.no.length +
+              this.attendees.maybe.length +
+              this.attendees.waiting.length > 0) {
+            this.rsvp = true;
+          }
+          if (node.getAttribute('rel') ==
+              'http://schemas.google.com/g/2005#event.organizer') {
+            this.organizer = node.getAttribute('valueString');
+          }
+          break;
+      case 'gd:recurrence':
+          this.recur = true;
+          break;
+      case 'gd:eventStatus':
+          switch (node.getAttribute('value')) {
+            case 'http://schemas.google.com/g/2005#event.canceled':
+                this.status = this.STATUS_CANCELED;
+                break;
+            case 'http://schemas.google.com/g/2005#event.confirmed':
+                this.status = this.STATUS_CONFIRMED;
+                break;
+            case 'http://schemas.google.com/g/2005#event.tentative':
+                this.status = this.STATUS_TENTATIVE;
+                break;
+          }
+          break;
+      case 'content':
+          if (node.firstChild) {
+            this.desc = node.firstChild.nodeValue;
+          }
+          break;
+      case 'gd:originalEvent':
+          this.originalId = node.getAttribute('id');
+          break;
+      case 'author':
+          if (node.firstChild.nodeName == 'name') {
+            this.creator = node.firstChild.firstChild.nodeValue;
+          }
+          break;
+      case 'link':
+          var url = node.getAttribute('href');
+          url = Utils.forceHttpsUrl(url);
+          switch (node.getAttribute('rel')) {
+            case 'alternate':
+                this.alternateUrl = url;
+                break;
+            case 'self':
+                this.selfUrl = url;
+                break;
+            case 'edit':
+                this.editUrl = url;
+                break;
+          }
+          break;
+      case 'updated':
+          this.updated = Utils.rfc3339StringToDate(node.firstChild.nodeValue);
+          break;
+      case 'published':
+          this.published =
+              Utils.rfc3339StringToDate(node.firstChild.nodeValue);
+          break;
     }
   }
 };
