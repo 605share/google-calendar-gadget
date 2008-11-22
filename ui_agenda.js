@@ -477,7 +477,7 @@ Agenda.prototype.addEvent = function(event, date, opt_same) {
     timeLbl.x = this.BORDER;
     timeLbl.y = 0;
     timeLbl.height = '100%';
-    timeLbl.width = 40;
+    timeLbl.width = 35;
     timeLbl.innerText = Utils.formatTime(event.startTime);
     timeLbl.valign = 'middle';
     timeLbl.align = 'right';
@@ -492,7 +492,7 @@ Agenda.prototype.addEvent = function(event, date, opt_same) {
     }
   }
   var itemLbl = itemDiv.appendElement('<label />');
-  itemLbl.x = (2 * this.BORDER) + 40;
+  itemLbl.x = (2 * this.BORDER) + 35;
   itemLbl.y = 0;
   itemLbl.height = '100%';
   itemLbl.width = itemDiv.width - (3 * this.BORDER) - 40;
