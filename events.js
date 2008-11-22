@@ -296,6 +296,7 @@ Events.prototype.onReceiveEvents = function(req, calendar, startDate, endDate) {
       calendar.lastUpdate =
           Utils.rfc3339StringToDate(node.firstChild.nodeValue);
       calendar.setUpdateDate();
+      Utils.hideLoading();
     }
   } else if (this.dataRetries < 5 &&
         (status == 504 || status == 408 || status == 12029)) {
@@ -502,6 +503,7 @@ Events.prototype.onReceiveUpdates = function(req, calendar) {
         this.onEventsReceived();
       }
     } else {
+      Utils.hideLoading();
       var updated = doc.getElementsByTagName('updated');
       var node = updated[0];
       calendar.lastUpdate =
