@@ -112,6 +112,9 @@
         </div>
       </div>
     </div>
+    <div name="loadingIndicator" visible="false" height="16" width="70" x="10" y="0" background="#FF0000">
+      <label color="#FFFFFF" size="8" font="arial">&LOADING;</label>
+    </div>
     <img name="resizeIndicator" src="images/resize_indicator.png"/>
   </div>
   <script src="main.js" />

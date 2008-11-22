@@ -83,6 +83,8 @@ Events.prototype.getUserCalendars = function(opt_url) {
     opt_url = CALENDAR_FEED_URL;
   }
 
+  Utils.showLoading();
+
   var req = Utils.createXhr();
   req.open('GET', opt_url, true);
   req.onReadyStateChange = Utils.bind(this.onGetUserCalendars, this, req);
@@ -204,6 +206,8 @@ Events.prototype.getEventsFromServer = function(calendar, startDate, endDate) {
     //g_cache.setEventsForCalendarRange(calendar, startDate, endDate, []);
     return;
   }
+
+  Utils.showLoading();
 
   var url = calendar.url +
       '?start-min=' + encodeURIComponent(Utils.getDateIso8601(startDate)) +
@@ -432,6 +436,8 @@ Events.prototype.getUpdatesFromServer = function(calendar) {
   if (Utils.checkSameDay(new Date(0), calendar.lastUpdate)) {
     return;
   }
+
+  Utils.showLoading();
 
   // Add one seconds since the lower bound is inclusive.
   calendar.lastUpdate.setSeconds(calendar.lastUpdate.getSeconds() + 1);

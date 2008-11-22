@@ -168,6 +168,7 @@ CalendarGadget.prototype.resize = function() {
 CalendarGadget.prototype.onLoginFailure = function(auth) {
   login.color = '#000000';
   login.enabled = true;
+  Utils.hideLoading();
   debug.error('Login failed: ' + auth.authResponse.Error);
 
   switch (auth.authResponse.Error) {
@@ -219,6 +220,7 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
 CalendarGadget.prototype.onLoginSuccess = function(auth) {
   g_events.getUserCalendars();
   g_events.startTimer();
+  Utils.hideLoading();
   this.goToday();
 };
 
@@ -263,6 +265,8 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
   tooltip = tooltip.replace('[![USERNAME]!]',
       options.getValue(OPTIONS.MAIL));
   linkOptions.tooltip = tooltip;
+
+  Utils.hideLoading();
 };
 
 /**
@@ -270,7 +274,9 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
  */
 CalendarGadget.prototype.onEventsReceived = function() {
   //debug.trace('Events received - redraw');
-  if (g_events.queueLength == 0) {
+  if (g_events.queueLength <= 1) {
+    g_events.queueLength = 0;
+    Utils.hideLoading();
     clearTimeout(this.redrawTimer);
     this.drawUI();
   } else {
@@ -586,6 +592,7 @@ CalendarGadget.prototype.onKeyUp = function() {
  * Perform login. Stores user credential in options and calls login
  */
 CalendarGadget.prototype.doLogin = function() {
+  Utils.showLoading();
   login.color = '#C0C0C0';
   login.enabled = false;
   g_errorMessage.removeMessage();

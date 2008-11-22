@@ -27,6 +27,8 @@ It's easy to start.</NO_ACCOUNT>
   <CREATE_ACCOUNT>Create an account</CREATE_ACCOUNT>
   <OFFLINE>You need an internet connection to use this gadget</OFFLINE>
 
+  <LOADING>Loading...</LOADING>
+
   <!-- Text for the custom menu items -->
   <MENU_VIEWS>Change view</MENU_VIEWS>
   <CALENDAR_VIEW>Calendar</CALENDAR_VIEW>

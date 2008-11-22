@@ -421,3 +421,17 @@ Utils.cleanXml = function(str) {
   str = str.replace(/"/g, '&quot;');
   return str;
 };
+
+/**
+ * Show loading indicator
+ */
+Utils.showLoading = function() {
+  loadingIndicator.visible = true;
+};
+
+/*
+ * Hide loading indicator
+ */
+Utils.hideLoading = function() {
+  loadingIndicator.visible = false;
+};
