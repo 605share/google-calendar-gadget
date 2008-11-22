@@ -88,6 +88,7 @@ FILES = [
   'images/month_nav_prev.png',
   'images/month_nav_prev_hover.png',
   'images/quick_add_bg.png',
+  'images/resize_indicator.png',
   'images/rsvp_maybe.png',
   'images/rsvp_no.png',
   'images/rsvp_yes.png',
