@@ -112,9 +112,34 @@
         </div>
       </div>
     </div>
-    <div name="loadingIndicator" visible="false" height="16" width="70" x="10" y="0" background="#FF0000">
-      <label color="#FFFFFF" size="8" font="arial">&LOADING;</label>
+    <div height="16" name="loadingIndicator" width="70" visible="false"
+      x="10" y="0" background="#FF0000">
+      <label color="#FFFFFF" font="arial">&LOADING;
+      </label>
     </div>
+    <listbox visible="false" name="optionsList">
+      <item name="optionsRefresh" cursor="hand">
+        <label>&REFRESH;</label>
+      </item>
+      <item name="optionsHour" cursor="hand">
+        <label name="optHour">&MENU_24HOUR;</label>
+      </item>
+      <item>
+        <label>&MENU_WEEKSTART;</label>
+      </item>
+      <item name="optionsStartSat" cursor="hand">
+        <label name="optSat">&DAY_SAT;</label>
+      </item>
+      <item name="optionsStartSun" cursor="hand">
+        <label name="optSun">&DAY_SUN;</label>
+      </item>
+      <item name="optionsStartMon" cursor="hand">
+        <label name="optMon">&DAY_MON;</label>
+      </item>
+      <item name="optionsCalendars" cursor="hand">
+        <label>&OPTIONS_TITLE;</label>
+      </item>
+    </listbox>
     <img name="resizeIndicator" src="images/resize_indicator.png"/>
   </div>
   <script src="main.js" />

@@ -8,13 +8,81 @@
  * Show options dialog to the user.
  */
 CalendarGadget.prototype.showOptions = function() {
+  optionsList.visible = !optionsList.visible;
+
+  optionsList.width = 100;
+  optionsList.height = 112;
+  optionsList.itemHeight = 16;
+  optionsList.itemWidth = 100;
+  optionsList.x = mainDiv.width - optionsList.width;
+  optionsList.y = mainDiv.height - footerDiv.height - optionsList.height + 1;
+  optionsList.background = 'images/optionsMenuBG.jpg';
+  optionsList.itemOverColor = '';
+  optionsList.itemSelectedColor = '';
+
+  // Set menu Strings
+  if (options.getValue(OPTIONS.HOUR24)) {
+    optHour.innerText = strings.MENU_12HOUR;
+  } else {
+    optHour.innerText = strings.MENU_24HOUR;
+  }
+  optSat.bold = false;
+  optSun.bold = false;
+  optMon.bold = false;
+  var weekStart = options.getValue(OPTIONS.WEEKSTART);
+  switch (weekStart) {
+    case START_SATURDAY:
+        optSat.bold = true;
+        break;
+    case START_SUNDAY:
+        optSun.bold = true;
+        break;
+    case START_MONDAY:
+        optMon.bold = true;
+        break;
+  }
+  optSat.innerText = '     ' + strings.DAY_SAT;
+  optSun.innerText = '     ' + strings.DAY_SUN;
+  optMon.innerText = '     ' + strings.DAY_MON;
+};
+
+CalendarGadget.prototype.optionsRefresh = function() {
+  g_events.updateCheck(new Date(), true);
+  this.showOptions();
+};
+
+CalendarGadget.prototype.optionsHour = function() {
+  options.putValue(OPTIONS.HOUR24, !options.getValue(OPTIONS.HOUR24));
+  this.resize();
+  this.showOptions();
+};
+
+CalendarGadget.prototype.optionsStartSat = function() {
+  this.optionsWeekStart(START_SATURDAY);
+};
+
+CalendarGadget.prototype.optionsStartSun = function() {
+  this.optionsWeekStart(START_SUNDAY);
+};
+
+CalendarGadget.prototype.optionsStartMon = function() {
+  this.optionsWeekStart(START_MONDAY);
+};
+
+CalendarGadget.prototype.optionsWeekStart = function(start) {
+  options.putValue(OPTIONS.WEEKSTART, start);
+  this.resize();
+  this.showOptions();
+};
+
+CalendarGadget.prototype.chooseCalendars = function() {
   //miniCalendarDiv.visible = false;
   //agendaDiv.visible = false;
   //footerDiv.visible = false;
   dialogDiv.visible = true;
   loginDiv.visible = false;
   optionsDiv.visible = true;
-
+  this.showOptions();
   this.resizeOptions();
 };
 

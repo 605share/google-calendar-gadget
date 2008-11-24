@@ -86,6 +86,14 @@ CalendarGadget.prototype.run = function() {
   linkOptions.onclick = Utils.bind(this.showOptions, this);
   optionsClose.onclick = Utils.bind(this.optionsSaveClose, this);
 
+  // Options menu
+  optionsRefresh.onclick = Utils.bind(this.optionsRefresh, this);
+  optionsHour.onclick = Utils.bind(this.optionsHour, this);
+  optionsStartSat.onclick = Utils.bind(this.optionsStartSat, this);
+  optionsStartSun.onclick = Utils.bind(this.optionsStartSun, this);
+  optionsStartMon.onclick = Utils.bind(this.optionsStartMon, this);
+  optionsCalendars.onclick = Utils.bind(this.chooseCalendars, this);
+
   g_uiAgenda = new Agenda(agendaDiv);
   g_uiAgenda.onDateSelected = Utils.bind(this.onDateSelected, this);
 
