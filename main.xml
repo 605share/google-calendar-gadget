@@ -96,8 +96,7 @@
           <img name="optionsFooterRight" src="images\footer_right.png"/>
           <div name="optionsFooterBg" background="images\footer_bg.png"/>
           <a height="16" name="optionsClose" width="93%" x="5" y="6" align="right"
-            color="#0065CD" font="Arial" size="8" valign="middle"
-           >&OPTIONS_CLOSE;
+            color="#0065CD" font="Arial" valign="middle">&OPTIONS_CLOSE;
           </a>
         </div>
         <div name="calendarListDiv" x="5" y="35">
@@ -114,32 +113,33 @@
     </div>
     <div height="16" name="loadingIndicator" width="70" visible="false"
       x="10" y="0" background="#FF0000">
-      <label color="#FFFFFF" font="arial">&LOADING;
+      <label color="#FFFFFF" font="arial" size="10">&LOADING;
       </label>
     </div>
-    <listbox visible="false" name="optionsList">
-      <item name="optionsRefresh" cursor="hand">
-        <label>&REFRESH;</label>
-      </item>
-      <item name="optionsHour" cursor="hand">
-        <label name="optHour">&MENU_24HOUR;</label>
-      </item>
-      <item>
-        <label>&MENU_WEEKSTART;</label>
-      </item>
-      <item name="optionsStartSat" cursor="hand">
-        <label name="optSat">&DAY_SAT;</label>
-      </item>
-      <item name="optionsStartSun" cursor="hand">
-        <label name="optSun">&DAY_SUN;</label>
-      </item>
-      <item name="optionsStartMon" cursor="hand">
-        <label name="optMon">&DAY_MON;</label>
-      </item>
-      <item name="optionsCalendars" cursor="hand">
-        <label>&OPTIONS_TITLE;</label>
-      </item>
-    </listbox>
+    <div visible="false" background="images/optionsMenuShadow.png" name="optionsListDiv">
+      <listbox name="optionsList" x="4" y="4">
+        <item>
+          <label>&MENU_VIEWS;
+          </label>
+        </item>
+        <item cursor="hand" name="optionsViewCalendar">
+          <label name="optCalendar">&DAY_SAT;
+          </label>
+        </item>
+        <item cursor="hand" name="optionsViewDay">
+          <label name="optDay">&DAY_SUN;
+          </label>
+        </item>
+        <item cursor="hand" name="optionsViewAgenda">
+          <label name="optAgenda">&DAY_MON;
+          </label>
+        </item>
+        <item cursor="hand" name="optionsCalendars">
+          <label>&OPTIONS_TITLE;
+          </label>
+        </item>
+      </listbox>
+    </div>
     <img name="resizeIndicator" src="images/resize_indicator.png"/>
   </div>
   <script src="main.js" />

@@ -87,11 +87,9 @@ CalendarGadget.prototype.run = function() {
   optionsClose.onclick = Utils.bind(this.optionsSaveClose, this);
 
   // Options menu
-  optionsRefresh.onclick = Utils.bind(this.optionsRefresh, this);
-  optionsHour.onclick = Utils.bind(this.optionsHour, this);
-  optionsStartSat.onclick = Utils.bind(this.optionsStartSat, this);
-  optionsStartSun.onclick = Utils.bind(this.optionsStartSun, this);
-  optionsStartMon.onclick = Utils.bind(this.optionsStartMon, this);
+  optionsViewCalendar.onclick = Utils.bind(this.optionsViewCalendar, this);
+  optionsViewDay.onclick = Utils.bind(this.optionsViewDay, this);
+  optionsViewAgenda.onclick = Utils.bind(this.optionsViewAgenda, this);
   optionsCalendars.onclick = Utils.bind(this.chooseCalendars, this);
 
   g_uiAgenda = new Agenda(agendaDiv);
@@ -328,16 +326,6 @@ CalendarGadget.prototype.addMenuItems = function(menu) {
   var flag = g_auth.getAuthToken() ? 0 : gddMenuItemFlagGrayed;
   menu.addItem(strings.TODAY, flag, Utils.bind(this.goToday, this));
 
-  // Add submenu for different views.
-  var views = menu.addPopup(strings.MENU_VIEWS);
-  var currentView = options.getValue(OPTIONS.VIEW);
-  flag = currentView == OPTIONS.CALENDARVIEW ? gddMenuItemFlagChecked : 0;
-  views.addItem(strings.CALENDAR_VIEW, flag, Utils.bind(this.setView, this));
-  flag = currentView == OPTIONS.DAYVIEW ? gddMenuItemFlagChecked : 0;
-  views.addItem(strings.DAY_VIEW, flag, Utils.bind(this.setView, this));
-  flag = currentView == OPTIONS.AGENDAVIEW ? gddMenuItemFlagChecked : 0;
-  views.addItem(strings.AGENDA_VIEW, flag, Utils.bind(this.setView, this));
-
   var optionsMenu = menu.addPopup(strings.OPTIONS_LINK);
 
   // Force a refresh if user wants to see his changes immediately instead
@@ -349,6 +337,16 @@ CalendarGadget.prototype.addMenuItems = function(menu) {
   flag = options.getValue(OPTIONS.HOUR24) ? gddMenuItemFlagChecked : 0;
   optionsMenu.addItem(strings.MENU_24HOUR, flag,
       Utils.bind(this.menuOption, this));
+
+  // Add submenu for different views.
+  var views = optionsMenu.addPopup(strings.MENU_VIEWS);
+  var currentView = options.getValue(OPTIONS.VIEW);
+  flag = currentView == OPTIONS.CALENDARVIEW ? gddMenuItemFlagChecked : 0;
+  views.addItem(strings.CALENDAR_VIEW, flag, Utils.bind(this.setView, this));
+  flag = currentView == OPTIONS.DAYVIEW ? gddMenuItemFlagChecked : 0;
+  views.addItem(strings.DAY_VIEW, flag, Utils.bind(this.setView, this));
+  flag = currentView == OPTIONS.AGENDAVIEW ? gddMenuItemFlagChecked : 0;
+  views.addItem(strings.AGENDA_VIEW, flag, Utils.bind(this.setView, this));
 
   // Add submenu for start of the week selection.
   var popup = optionsMenu.addPopup(strings.MENU_WEEKSTART);

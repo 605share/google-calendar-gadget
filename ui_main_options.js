@@ -8,65 +8,58 @@
  * Show options dialog to the user.
  */
 CalendarGadget.prototype.showOptions = function() {
-  optionsList.visible = !optionsList.visible;
+  optionsListDiv.visible = !optionsListDiv.visible;
 
+  if (!optionsListDiv.visible) {
+    return;
+  }
+
+  optionsListDiv.width = 104;
+  optionsListDiv.height = 84;
+  optionsListDiv.x = mainDiv.width - optionsListDiv.width;
+  optionsListDiv.y = mainDiv.height - footerDiv.height - optionsListDiv.height + 1;
   optionsList.width = 100;
-  optionsList.height = 112;
+  optionsList.height = 80;
   optionsList.itemHeight = 16;
   optionsList.itemWidth = 100;
-  optionsList.x = mainDiv.width - optionsList.width;
-  optionsList.y = mainDiv.height - footerDiv.height - optionsList.height + 1;
   optionsList.background = 'images/optionsMenuBG.jpg';
   optionsList.itemOverColor = '';
   optionsList.itemSelectedColor = '';
 
   // Set menu Strings
-  if (options.getValue(OPTIONS.HOUR24)) {
-    optHour.innerText = strings.MENU_12HOUR;
-  } else {
-    optHour.innerText = strings.MENU_24HOUR;
-  }
-  optSat.bold = false;
-  optSun.bold = false;
-  optMon.bold = false;
-  var weekStart = options.getValue(OPTIONS.WEEKSTART);
-  switch (weekStart) {
-    case START_SATURDAY:
-        optSat.bold = true;
+  optCalendar.bold = false;
+  optDay.bold = false;
+  optAgenda.bold = false;
+  var currentView = options.getValue(OPTIONS.VIEW);
+  switch (currentView) {
+    case OPTIONS.CALENDARVIEW:
+        optCalendar.bold = true;
         break;
-    case START_SUNDAY:
-        optSun.bold = true;
+    case OPTIONS.DAYVIEW:
+        optDay.bold = true;
         break;
-    case START_MONDAY:
-        optMon.bold = true;
+    case OPTIONS.AGENDAVIEW:
+        optAgenda.bold = true;
         break;
   }
-  optSat.innerText = '     ' + strings.DAY_SAT;
-  optSun.innerText = '     ' + strings.DAY_SUN;
-  optMon.innerText = '     ' + strings.DAY_MON;
+  optCalendar.innerText = '     ' + strings.CALENDAR_VIEW;
+  optDay.innerText = '     ' + strings.DAY_VIEW;
+  optAgenda.innerText = '     ' + strings.AGENDA_VIEW;
 };
 
-CalendarGadget.prototype.optionsRefresh = function() {
-  g_events.updateCheck(new Date(), true);
+CalendarGadget.prototype.optionsViewCalendar = function() {
+  this.setView(strings.CALENDAR_VIEW);
   this.showOptions();
 };
 
-CalendarGadget.prototype.optionsHour = function() {
-  options.putValue(OPTIONS.HOUR24, !options.getValue(OPTIONS.HOUR24));
-  this.resize();
+CalendarGadget.prototype.optionsViewDay = function() {
+  this.setView(strings.DAY_VIEW);
   this.showOptions();
 };
 
-CalendarGadget.prototype.optionsStartSat = function() {
-  this.optionsWeekStart(START_SATURDAY);
-};
-
-CalendarGadget.prototype.optionsStartSun = function() {
-  this.optionsWeekStart(START_SUNDAY);
-};
-
-CalendarGadget.prototype.optionsStartMon = function() {
-  this.optionsWeekStart(START_MONDAY);
+CalendarGadget.prototype.optionsViewAgenda = function() {
+  this.setView(strings.AGENDA_VIEW);
+  this.showOptions();
 };
 
 CalendarGadget.prototype.optionsWeekStart = function(start) {
