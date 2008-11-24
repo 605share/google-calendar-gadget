@@ -75,7 +75,7 @@ CalendarGadget.prototype.chooseCalendars = function() {
   dialogDiv.visible = true;
   loginDiv.visible = false;
   optionsDiv.visible = true;
-  this.showOptions();
+  optionsListDiv.visible = false;
   this.resizeOptions();
 };
 

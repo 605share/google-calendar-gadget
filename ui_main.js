@@ -326,20 +326,18 @@ CalendarGadget.prototype.addMenuItems = function(menu) {
   var flag = g_auth.getAuthToken() ? 0 : gddMenuItemFlagGrayed;
   menu.addItem(strings.TODAY, flag, Utils.bind(this.goToday, this));
 
-  var optionsMenu = menu.addPopup(strings.OPTIONS_LINK);
-
   // Force a refresh if user wants to see his changes immediately instead
   // of waiting for the next scheduled refresh.
-  optionsMenu.addItem(strings.REFRESH, 0,
+  menu.addItem(strings.REFRESH, 0,
       Utils.bind(g_events.updateCheck, g_events, new Date(), true));
 
   // Option for toggle 24hour and am/pm mode
   flag = options.getValue(OPTIONS.HOUR24) ? gddMenuItemFlagChecked : 0;
-  optionsMenu.addItem(strings.MENU_24HOUR, flag,
+  menu.addItem(strings.MENU_24HOUR, flag,
       Utils.bind(this.menuOption, this));
 
   // Add submenu for different views.
-  var views = optionsMenu.addPopup(strings.MENU_VIEWS);
+  var views = menu.addPopup(strings.MENU_VIEWS);
   var currentView = options.getValue(OPTIONS.VIEW);
   flag = currentView == OPTIONS.CALENDARVIEW ? gddMenuItemFlagChecked : 0;
   views.addItem(strings.CALENDAR_VIEW, flag, Utils.bind(this.setView, this));
@@ -349,7 +347,7 @@ CalendarGadget.prototype.addMenuItems = function(menu) {
   views.addItem(strings.AGENDA_VIEW, flag, Utils.bind(this.setView, this));
 
   // Add submenu for start of the week selection.
-  var popup = optionsMenu.addPopup(strings.MENU_WEEKSTART);
+  var popup = menu.addPopup(strings.MENU_WEEKSTART);
   var currentStart = options.getValue(OPTIONS.WEEKSTART);
   flag = currentStart == START_SATURDAY ? gddMenuItemFlagChecked : 0;
   popup.addItem(strings.DAY_SAT, flag, Utils.bind(this.menuOption, this));
@@ -358,14 +356,15 @@ CalendarGadget.prototype.addMenuItems = function(menu) {
   flag = currentStart == START_MONDAY ? gddMenuItemFlagChecked : 0;
   popup.addItem(strings.DAY_MON, flag, Utils.bind(this.menuOption, this));
 
+  // Choose calendars item in options menu
+  menu.addItem(strings.OPTIONS_TITLE, 0,
+      Utils.bind(this.chooseCalendars, this));
+
+
   // Show sign out only if currently signed in
   if (g_auth.getAuthToken()) {
     menu.addItem(strings.SIGN_OUT, 0, Utils.bind(this.logout, this));
   }
-
-  // Choose calendars item in options menu
-  optionsMenu.addItem(strings.OPTIONS_TITLE, 0,
-      Utils.bind(this.showOptions, this));
 
   // Visit the online page for Google Calendar
   menu.addItem(strings.VISIT_CALENDAR, 0, 

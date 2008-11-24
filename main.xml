@@ -96,7 +96,8 @@
           <img name="optionsFooterRight" src="images\footer_right.png"/>
           <div name="optionsFooterBg" background="images\footer_bg.png"/>
           <a height="16" name="optionsClose" width="93%" x="5" y="6" align="right"
-            color="#0065CD" font="Arial" valign="middle">&OPTIONS_CLOSE;
+            color="#0065CD" font="Arial" size="10" valign="middle"
+           >&OPTIONS_CLOSE;
           </a>
         </div>
         <div name="calendarListDiv" x="5" y="35">
@@ -116,10 +117,10 @@
       <label color="#FFFFFF" font="arial" size="10">&LOADING;
       </label>
     </div>
-    <div visible="false" background="images/optionsMenuShadow.png" name="optionsListDiv">
+    <div name="optionsListDiv" visible="false" background="images/optionsMenuShadow.png">
       <listbox name="optionsList" x="4" y="4">
         <item>
-          <label>&MENU_VIEWS;
+          <label>&MENU_VIEWS;:
           </label>
         </item>
         <item cursor="hand" name="optionsViewCalendar">
