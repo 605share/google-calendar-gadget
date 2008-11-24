@@ -624,6 +624,11 @@ CalendarGadget.prototype.showErrorMsg = function(msg) {
  * show quick add dialog to user
  */
 CalendarGadget.prototype.quickAddEvent = function() {
+  if (!Utils.isOnline()) {
+    g_calendarGadget.showErrorMsg(strings.OFFLINE);
+    return;
+  }
+
   debug.trace('Show add event dialog');
   if (this.detailsView != null) {
     plugin.closeDetailsView();
