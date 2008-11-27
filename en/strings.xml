@@ -30,14 +30,7 @@ It's easy to start.</NO_ACCOUNT>
   <LOADING>Loading...</LOADING>
 
   <!-- Text for the custom menu items -->
-  <MENU_VIEWS>Change view</MENU_VIEWS>
-  <CALENDAR_VIEW>Calendar</CALENDAR_VIEW>
-  <DAY_VIEW>Day view</DAY_VIEW>
-  <AGENDA_VIEW>Just agenda</AGENDA_VIEW>
   <SIGN_OUT>Sign out</SIGN_OUT>
-  <MENU_24HOUR>Use 24 hour clock</MENU_24HOUR>
-  <MENU_12HOUR>Use am/pm clock</MENU_12HOUR>
-  <MENU_WEEKSTART>Week starts on</MENU_WEEKSTART>
   <REFRESH>Refresh</REFRESH>
   <VISIT_CALENDAR>Go to Google Calendar online</VISIT_CALENDAR>
 
@@ -167,8 +160,13 @@ It's easy to start.</NO_ACCOUNT>
   <ERROR_RSVP_RESPONSE>Could not set your reponse for this event. Please try again later.</ERROR_RSVP_RESPONSE>
 
   <!-- Options dialog -->
-  <OPTIONS_TITLE>Choose calendars…</OPTIONS_TITLE>
-  <OPTIONS_CLOSE>Close dialog</OPTIONS_CLOSE>
+  <OPTION_VIEWS>Change view</OPTION_VIEWS>
+  <CALENDAR_VIEW>Calendar</CALENDAR_VIEW>
+  <DAY_VIEW>Day view</DAY_VIEW>
+  <AGENDA_VIEW>Just agenda</AGENDA_VIEW>
+  <OPTION_TIME>Use 24 hour clock</OPTION_TIME>
+  <OPTION_WEEKSTART>Week starts on</OPTION_WEEKSTART>
+  <OPTIONS_CHOOSE>Choose calendars</OPTIONS_CHOOSE>
   <MY_CALENDARS>My calendars</MY_CALENDARS>
   <OTHER_CALENDARS>Other calendars</OTHER_CALENDARS>
   <OPTIONS_TOOLTIP>Choose the visible calendars for [![USERNAME]!]</OPTIONS_TOOLTIP>

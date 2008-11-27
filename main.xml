@@ -85,63 +85,13 @@
           <edit height="16" name="captcha" x="1" y="1" font="arial"/>
         </div>
       </div>
-      <div name="optionsDiv" visible="false">
-        <label height="25" name="optionsTitle" width="100%" align="center"
-          bold="true" font="Arial" size="9" valign="middle"
-          wordwrap="true">&OPTIONS_TITLE;
-        </label>
-        <div height="1" name="sparator" width="100%" x="0" y="25" background="#CACACA"/>
-        <div name="optionsFooter">
-          <img name="optionsFooterLeft" src="images\footer_left.png"/>
-          <img name="optionsFooterRight" src="images\footer_right.png"/>
-          <div name="optionsFooterBg" background="images\footer_bg.png"/>
-          <a height="16" name="optionsClose" width="93%" x="5" y="6" align="right"
-            color="#0065CD" font="Arial" size="10" valign="middle"
-           >&OPTIONS_CLOSE;
-          </a>
-        </div>
-        <div name="calendarListDiv" x="5" y="35">
-          <listbox name="calendarList" x="0" y="0" background="#D6E9F8" itemHeight="16"
-            itemOverColor="#D6E9F8" itemSelectedColor="#D6E9F8"/>
-          <div name="calendarScroll" width="10" background="#CDCDD3">
-            <scrollbar enabled="true" height="115" hitTest="htclient" name="calendar_sb"
-              width="8" x="1" y="-10" lineStep="10" orientation="vertical"
-              thumbDownImage="images\scroll.png" thumbImage="images\scroll.png"
-              thumbOverImage="images\scroll.png"/>
-          </div>
-        </div>
-      </div>
     </div>
     <div height="16" name="loadingIndicator" width="70" visible="false"
       x="10" y="0" background="#FF0000">
       <label color="#FFFFFF" font="arial" size="10">&LOADING;
       </label>
     </div>
-    <div name="optionsListDiv" visible="false" background="images/optionsMenuShadow.png">
-      <listbox name="optionsList" x="4" y="4">
-        <item>
-          <label>&MENU_VIEWS;:
-          </label>
-        </item>
-        <item cursor="hand" name="optionsViewCalendar">
-          <label name="optCalendar">&DAY_SAT;
-          </label>
-        </item>
-        <item cursor="hand" name="optionsViewDay">
-          <label name="optDay">&DAY_SUN;
-          </label>
-        </item>
-        <item cursor="hand" name="optionsViewAgenda">
-          <label name="optAgenda">&DAY_MON;
-          </label>
-        </item>
-        <item cursor="hand" name="optionsCalendars">
-          <label>&OPTIONS_TITLE;
-          </label>
-        </item>
-      </listbox>
-    </div>
-    <img name="resizeIndicator" src="images/resize_indicator.png"/>
+   <img name="resizeIndicator" src="images/resize_indicator.png"/>
   </div>
   <script src="main.js" />
   <script src="auth.js" />

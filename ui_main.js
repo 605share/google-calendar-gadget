@@ -84,13 +84,6 @@ CalendarGadget.prototype.run = function() {
   linkToday.onclick = Utils.bind(this.goToday, this);
   linkAddEvent.onclick = Utils.bind(this.quickAddEvent, this);
   linkOptions.onclick = Utils.bind(this.showOptions, this);
-  optionsClose.onclick = Utils.bind(this.optionsSaveClose, this);
-
-  // Options menu
-  optionsViewCalendar.onclick = Utils.bind(this.optionsViewCalendar, this);
-  optionsViewDay.onclick = Utils.bind(this.optionsViewDay, this);
-  optionsViewAgenda.onclick = Utils.bind(this.optionsViewAgenda, this);
-  optionsCalendars.onclick = Utils.bind(this.chooseCalendars, this);
 
   g_uiAgenda = new Agenda(agendaDiv);
   g_uiAgenda.onDateSelected = Utils.bind(this.onDateSelected, this);
@@ -164,7 +157,6 @@ CalendarGadget.prototype.resize = function() {
 
   this.resizeBlueDialog();
   this.resizeLoginForm();
-  this.resizeOptions();
 };
 
 /**
@@ -261,11 +253,14 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
   footerDiv.visible = true;
 
   // The show/hide options is not available on the mac.
-  if (Utils.isMac()) return;
+  if (Utils.isMac()) {
+    plugin.onShowOptionsDlg = Utils.bind(this.showOptionsDlg, this);
+    return;
+  }
 
-  linkOptions.visible = g_cache.getCalendarCount() > 0;
-  linkOptions.visible =
-        !(linkOptions.x < linkAddEvent.x + linkAddEvent.width);
+  plugin.onShowOptionsDlg = Utils.bind(this.showOptionsDlg, this);
+  linkOptions.visible = (g_cache.getCalendarCount() > 0) &&
+      !(linkOptions.x < linkAddEvent.x + linkAddEvent.width);
   linkAddEvent.visible = g_cache.getCalendarCount() > 0;
   var tooltip = strings.OPTIONS_TOOLTIP;
   tooltip = tooltip.replace('[![USERNAME]!]',
@@ -330,36 +325,6 @@ CalendarGadget.prototype.addMenuItems = function(menu) {
   // of waiting for the next scheduled refresh.
   menu.addItem(strings.REFRESH, 0,
       Utils.bind(g_events.updateCheck, g_events, new Date(), true));
-
-  // Option for toggle 24hour and am/pm mode
-  flag = options.getValue(OPTIONS.HOUR24) ? gddMenuItemFlagChecked : 0;
-  menu.addItem(strings.MENU_24HOUR, flag,
-      Utils.bind(this.menuOption, this));
-
-  // Add submenu for different views.
-  var views = menu.addPopup(strings.MENU_VIEWS);
-  var currentView = options.getValue(OPTIONS.VIEW);
-  flag = currentView == OPTIONS.CALENDARVIEW ? gddMenuItemFlagChecked : 0;
-  views.addItem(strings.CALENDAR_VIEW, flag, Utils.bind(this.setView, this));
-  flag = currentView == OPTIONS.DAYVIEW ? gddMenuItemFlagChecked : 0;
-  views.addItem(strings.DAY_VIEW, flag, Utils.bind(this.setView, this));
-  flag = currentView == OPTIONS.AGENDAVIEW ? gddMenuItemFlagChecked : 0;
-  views.addItem(strings.AGENDA_VIEW, flag, Utils.bind(this.setView, this));
-
-  // Add submenu for start of the week selection.
-  var popup = menu.addPopup(strings.MENU_WEEKSTART);
-  var currentStart = options.getValue(OPTIONS.WEEKSTART);
-  flag = currentStart == START_SATURDAY ? gddMenuItemFlagChecked : 0;
-  popup.addItem(strings.DAY_SAT, flag, Utils.bind(this.menuOption, this));
-  flag = currentStart == START_SUNDAY ? gddMenuItemFlagChecked : 0;
-  popup.addItem(strings.DAY_SUN, flag, Utils.bind(this.menuOption, this));
-  flag = currentStart == START_MONDAY ? gddMenuItemFlagChecked : 0;
-  popup.addItem(strings.DAY_MON, flag, Utils.bind(this.menuOption, this));
-
-  // Choose calendars item in options menu
-  menu.addItem(strings.OPTIONS_TITLE, 0,
-      Utils.bind(this.chooseCalendars, this));
-
 
   // Show sign out only if currently signed in
   if (g_auth.getAuthToken()) {
@@ -440,6 +405,7 @@ CalendarGadget.prototype.setView = function(itemtext) {
  * Logout user from gadget
  */
 CalendarGadget.prototype.logout = function() {
+  plugin.onShowOptionsDlg = null;
   g_auth.clearAuthToken();
   g_cache.clearCalendarCache();
   g_cache.clearEventCache();
@@ -457,7 +423,6 @@ CalendarGadget.prototype.showLogin = function(opt_captcha, opt_focus) {
   footerDiv.visible = false;
   dialogDiv.visible = true;
   loginDiv.visible = true;
-  optionsDiv.visible = false;
 
   if (opt_captcha) {
     userLabel.visible = false;

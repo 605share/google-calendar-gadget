@@ -172,7 +172,7 @@ CalendarGadget.prototype.resizeDesign = function() {
     linkOptions.width = sizeCalc.idealBoundingRect.width;
     linkOptions.x = footerDiv.width - linkOptions.width - linkToday.x;
 
-    linkOptions.visible =
+    linkOptions.visible = linkOptions.visible && 
         !(linkOptions.x < linkAddEvent.x + linkAddEvent.width);
   }
 
@@ -258,88 +258,5 @@ CalendarGadget.prototype.resizeLoginForm = function() {
   } else {
     newAccountLink.visible = true;
     labelNoAccount.visible = true;
-  }
-};
-
-CalendarGadget.prototype.resizeOptions = function() {
-  optionsDiv.x = 0;
-  optionsDiv.y = 5;
-  optionsDiv.width = mainDiv.width;
-  optionsDiv.height = mainDiv.height - 5;
-
-  calendarListDiv.x = 5;
-  calendarListDiv.y = 30;
-  calendarListDiv.height = optionsFooter.y - calendarListDiv.y;
-  calendarListDiv.width = optionsDiv.width - 2 * calendarListDiv.x;
-  calendarList.x = 0;
-  calendarList.y = 0;
-  calendarList.width = calendarListDiv.width - calendarScroll.width;
-  calendarList.height = 200;
-  calendarScroll.x = calendarListDiv.width - calendarScroll.width;
-  calendarScroll.y = -10;
-  calendarScroll.height = calendarListDiv.height + 20;
-
-  optionsFooter.x = 0;
-  optionsFooter.height = 28;
-  optionsFooter.y = optionsDiv.height - optionsFooter.height;
-  optionsFooter.width = optionsDiv.width;
-  optionsFooterLeft.x = 0;
-  optionsFooterLeft.y = 0;
-  optionsFooterRight.x = optionsFooter.width - optionsFooterRight.srcWidth;
-  optionsFooterRight.y = 0;
-  optionsFooterBg.x = optionsFooterLeft.srcWidth;
-  optionsFooterBg.y = 0;
-  optionsFooterBg.width = optionsFooter.width - optionsFooterRight.srcWidth -
-      optionsFooterLeft.srcWidth;
-  optionsFooterBg.height = optionsFooterLeft.srcHeight;
-
-  if (optionsDiv.visible) {
-    calendarList.removeAllElements();
-
-    var ownCalendars = [];
-    var otherCalendars = [];
-    for (var i = 0; i < g_cache.getCalendarCount(); ++i) {
-      var cal = g_cache.getCalendar(i);
-      if (!cal.isVisible()) continue;
-      if (cal.accessLevel == 'owner') {
-        ownCalendars.push(cal);
-      } else {
-        otherCalendars.push(cal);
-      }
-    }
-    ownCalendars.sort(this.sortCalendars);
-    otherCalendars.sort(this.sortCalendars);
-
-    this.addOptionText(strings.MY_CALENDARS);
-    for (var i = 0; i < ownCalendars.length; ++i) {
-      var cal = ownCalendars[i];
-      this.optionsAddCalendar(cal);
-    }
-
-    this.addOptionText(strings.OTHER_CALENDARS);
-    for (var i = 0; i < otherCalendars.length; ++i) {
-      var cal = otherCalendars[i];
-      this.optionsAddCalendar(cal);
-    }
-
-    calendarList.height = calendarList.children.count *
-        calendarList.itemHeight;
-    if (calendarList.height < calendarListDiv.height) {
-      if (calendarList.y < 0) {
-        calendarList.y = 0;
-      }
-      calendarList.height = calendarListDiv.height;
-      calendarScroll.visible = false;
-    } else {
-      calendarScroll.visible = true;
-    }
-    calendar_sb.max = calendarList.children.count * calendarList.itemHeight -
-                      calendarListDiv.height;
-    calendar_sb.y = 0;
-    calendar_sb.height = calendarScroll.height;
-    if (calendar_sb.max < 0) {
-      calendar_sb.max = 0;
-    }
-    calendar_sb.onchange = Utils.bind(this.scrollCalendars, this);
   }
 };
