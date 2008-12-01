@@ -7,7 +7,9 @@
   <about>
     <name>&GADGET_NAME;</name>
     <description>&GADGET_DESCRIPTION;</description>
-    <aboutText>&GADGET_ABOUT_TEXT;</aboutText>
+    <aboutText>&GADGET_ABOUT_TEXT;
+
+&GADGET_VERSION;</aboutText>
     <smallIcon>icon_small.png</smallIcon>
     <icon>icon_large.png</icon>
     <version>&GADGET_VERSION;</version>
