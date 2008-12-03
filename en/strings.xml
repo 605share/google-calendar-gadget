@@ -161,9 +161,9 @@ It's easy to start.</NO_ACCOUNT>
 
   <!-- Options dialog -->
   <OPTION_VIEWS>Change view</OPTION_VIEWS>
-  <CALENDAR_VIEW>Calendar</CALENDAR_VIEW>
-  <DAY_VIEW>Day view</DAY_VIEW>
-  <AGENDA_VIEW>Just agenda</AGENDA_VIEW>
+  <CALENDAR_VIEW>Month</CALENDAR_VIEW>
+  <DAY_VIEW>Day</DAY_VIEW>
+  <AGENDA_VIEW>Agenda</AGENDA_VIEW>
   <OPTION_TIME>Use 24 hour clock</OPTION_TIME>
   <OPTION_WEEKSTART>Week starts on</OPTION_WEEKSTART>
   <OPTIONS_CHOOSE>Choose calendars</OPTIONS_CHOOSE>

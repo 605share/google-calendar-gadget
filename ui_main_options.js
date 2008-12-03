@@ -78,21 +78,51 @@ CalendarGadget.prototype.showOptionsDlg = function(wnd) {
 
   ctl = wnd.AddControl(gddWndCtrlClassLabel, 0, "", strings.MY_CALENDARS,
       20, 140, 220, 20);
+
+  var calX = 40;
+  var calY = 155;
+  var calCount = 1;
+
   for (var i = 0; i < ownCalendars.length; ++i) {
     var cal = ownCalendars[i];
     ctl = wnd.AddControl(gddWndCtrlClassButton, gddWndCtrlTypeButtonCheck,
-      'own' + i, cal.getTitle(), 40, i * 20 + 155, 220, 20);
+      'own' + i, cal.getTitle(), calX, calY, 180, 20);
     ctl.value = cal.isSelected();
+
+    calCount++;
+    calY += 20;
+    if (calCount == 20) {
+      calCount = 0;
+      calY = 140;
+      calX += 180;
+    }
   }
 
   ctl = wnd.AddControl(gddWndCtrlClassLabel, 0, "", strings.OTHER_CALENDARS,
-      20, ownCalendars.length * 20 + 155, 220, 20);
-  var offset = ownCalendars.length * 20 + 170;
+      20, calY, 180, 20);
+
+  calCount++;
+  calY += 20;
+  if (calCount == 20) {
+    calCount = 0;
+    calY = 140;
+    calX += 180;
+  }
+
   for (var i = 0; i < otherCalendars.length; ++i) {
     var cal = otherCalendars[i];
     ctl = wnd.AddControl(gddWndCtrlClassButton, gddWndCtrlTypeButtonCheck,
-      'other' + i, cal.getTitle(), 40, offset + i * 20, 220, 20);
+      'other' + i, cal.getTitle(), calX, calY, 180, 20);
     ctl.value = cal.isSelected();
+
+    calCount++;
+    calY += 20;
+    if (calCount == 20) {
+      calCount = 0;
+      calY = 140;
+      calX += 180;
+    }
+
   }
 
   wnd.onClose = Utils.bind(this.optionsSaveClose, this);
@@ -124,6 +154,7 @@ CalendarGadget.prototype.optionsSaveClose = function(wnd, code) {
         options.putValue(OPTIONS.VIEW, OPTIONS.CALENDARVIEW);
         break;
     case strings.DAY_VIEW:
+        debug.trace('Day View');
         options.putValue(OPTIONS.VIEW, OPTIONS.DAYVIEW);
         break;
     case strings.AGENDA_VIEW:
@@ -172,8 +203,5 @@ CalendarGadget.prototype.optionsSaveClose = function(wnd, code) {
 
   }
 
-  // Redraw calendar, dayview and agenda to apply changes.
-  g_uiCal.draw();
-  g_uiDayView.draw();
-  g_uiAgenda.draw();
+  this.resize();
 };
