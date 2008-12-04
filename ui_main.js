@@ -183,6 +183,9 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
     case auth.NO_CREDENTIALS:
         this.showLogin(null, false);
         break;
+    case auth.MANDATORY_UPGRADE:
+        this.showUpgrade();
+        break;
     case auth.BAD_AUTHENTICATION:
         this.showErrorMsg(strings.ERROR_BAD_AUTHENTICATION);
         this.showLogin(null, true);
@@ -310,9 +313,10 @@ CalendarGadget.prototype.onMandatoryUpgrade = function(upgradeInfo) {
 
   this.logout();
 
-  upgradeReason.innerText = upgradeInfo.reason;
-  upgradeDownloadUrl.href = upgradeInfo.downloadUrl;
-  upgradeInfoUrl.href = upgradeInfo.infoUrl;
+  options.putValue(OPTIONS.UPGRADE_REASON, upgradeInfo.reason);
+  options.putValue(OPTIONS.UPGRADE_URL, upgradeInfo.downloadUrl);
+  options.putValue(OPTIONS.UPGRADE_INFO, upgradeInfo.infoUrl);
+  options.putValue(OPTIONS.UPGRADE, upgradeInfo.mandatoryVersion.toString());
 
   this.showUpgrade();
 };
@@ -440,6 +444,10 @@ CalendarGadget.prototype.logout = function() {
  * Show upgrade dialog to user.
  */
 CalendarGadget.prototype.showUpgrade = function() {
+  upgradeReason.innerText = options.getValue(OPTIONS.UPGRADE_REASON);
+  upgradeDownloadUrl.href = options.getValue(OPTIONS.UPGRADE_URL);
+  upgradeInfoUrl.href = options.getValue(OPTIONS.UPGRADE_INFO);
+
   footerDiv.visible = false;
   dialogDiv.visible = true;
   upgradeDiv.visible = true;
@@ -452,6 +460,11 @@ CalendarGadget.prototype.showUpgrade = function() {
  * @param {boolean} opt_focus True, if input fields should be focused.
  */
 CalendarGadget.prototype.showLogin = function(opt_captcha, opt_focus) {
+  if (Utils.needsUpgrade()) {
+    this.showUpgrade();
+    return;
+  }
+
   footerDiv.visible = false;
   dialogDiv.visible = true;
   loginDiv.visible = true;

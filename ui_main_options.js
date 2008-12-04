@@ -76,22 +76,29 @@ CalendarGadget.prototype.showOptionsDlg = function(wnd) {
   ownCalendars.sort(this.sortCalendars);
   otherCalendars.sort(this.sortCalendars);
 
-  ctl = wnd.AddControl(gddWndCtrlClassLabel, 0, "", strings.MY_CALENDARS,
-      20, 140, 220, 20);
+  var itemHeight = 18;
+  var screenHeight = framework.system.screen.size.height;
+  screenHeight -= 140; // Offset of first calendar item
+  screenHeight -= 150; // Additional offset for OK/Cancel buttons and Titlebar
+  var maxCalendars = Math.floor(screenHeight / itemHeight);
+  maxCalendars -= maxCalendars % 5;
 
-  var calX = 40;
+  ctl = wnd.AddControl(gddWndCtrlClassLabel, 0, "", strings.MY_CALENDARS,
+      10, 140, 220, 20);
+
+  var calX = 20;
   var calY = 155;
   var calCount = 1;
 
   for (var i = 0; i < ownCalendars.length; ++i) {
     var cal = ownCalendars[i];
     ctl = wnd.AddControl(gddWndCtrlClassButton, gddWndCtrlTypeButtonCheck,
-      'own' + i, cal.getTitle(), calX, calY, 180, 20);
+      'own' + i, cal.getTitle(), calX, calY, 120, itemHeight);
     ctl.value = cal.isSelected();
 
     calCount++;
-    calY += 20;
-    if (calCount == 20) {
+    calY += itemHeight;
+    if (calCount == maxCalendars) {
       calCount = 0;
       calY = 140;
       calX += 180;
@@ -99,28 +106,28 @@ CalendarGadget.prototype.showOptionsDlg = function(wnd) {
   }
 
   ctl = wnd.AddControl(gddWndCtrlClassLabel, 0, "", strings.OTHER_CALENDARS,
-      20, calY, 180, 20);
+      10, calY + 4, 180, 16);
 
   calCount++;
-  calY += 20;
-  if (calCount == 20) {
+  calY += itemHeight;
+  if (calCount == maxCalendars) {
     calCount = 0;
     calY = 140;
-    calX += 180;
+    calX += 120;
   }
 
   for (var i = 0; i < otherCalendars.length; ++i) {
     var cal = otherCalendars[i];
     ctl = wnd.AddControl(gddWndCtrlClassButton, gddWndCtrlTypeButtonCheck,
-      'other' + i, cal.getTitle(), calX, calY, 180, 20);
+      'other' + i, cal.getTitle(), calX, calY, 120, itemHeight);
     ctl.value = cal.isSelected();
 
     calCount++;
-    calY += 20;
-    if (calCount == 20) {
+    calY += itemHeight;
+    if (calCount == maxCalendars) {
       calCount = 0;
       calY = 140;
-      calX += 180;
+      calX += 120;
     }
 
   }

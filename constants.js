@@ -67,7 +67,11 @@ var OPTIONS = {
   USERZIP: 'userZipCode',
   UPDATE_RSVP_EVENT: 'rsvpEvent',
   UPDATE_RSVP_CALENDAR: 'rsvpCalendar',
-  UPDATE_RSVP_TRIGGER: 'rsvpUpdateTrigger'
+  UPDATE_RSVP_TRIGGER: 'rsvpUpdateTrigger',
+  UPGRADE: 'mandatoryUpgrade',
+  UPGRADE_REASON: 'upgradeReason',
+  UPGRADE_URL: 'upgradeUrl',
+  UPGRADE_INFO: 'upgradeInfo'
 };
 
 // Days the week can start on.

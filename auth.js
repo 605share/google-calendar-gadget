@@ -35,6 +35,7 @@ Auth.prototype.CAPTCHA_PAGE = 'https://www.google.com/accounts/';
  */
 Auth.prototype.OFFLINE = 'Offline';
 Auth.prototype.NO_CREDENTIALS = 'NoCredentials';
+Auth.prototype.MANDATORY_UPGRADE = 'MandatoryUpgrade';
 Auth.prototype.BAD_AUTHENTICATION = 'BadAuthentication';
 Auth.prototype.NOT_VERIFIED = 'NotVerified';
 Auth.prototype.TERMS_NOT_AGREED = 'TermsNotAgreed';
@@ -117,6 +118,11 @@ Auth.prototype.returnError = function(errorData) {
 Auth.prototype.login = function(opt_captchaToken, opt_captchaText) {
   if (!Utils.isOnline()) {
     this.returnError(this.OFFLINE);
+    return;
+  }
+
+  if (Utils.needsUpgrade()) {
+    this.returnError(this.MANDATORY_UPGRADE);
     return;
   }
 

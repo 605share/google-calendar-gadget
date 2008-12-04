@@ -429,9 +429,20 @@ Utils.showLoading = function() {
   loadingIndicator.visible = true;
 };
 
-/*
+/**
  * Hide loading indicator
  */
 Utils.hideLoading = function() {
   loadingIndicator.visible = false;
+};
+
+/**
+ * Check if an upgrade is needed
+ * @return {boolean} True, if upgrade is necessary.
+ */
+Utils.needsUpgrade = function() {
+  debug.trace('Version: ' + options.getValue(OPTIONS.UPGRADE));
+  var currentVersion = Version.parse(strings.GADGET_VERSION);
+  var upgradeVersion = Version.parse(options.getValue(OPTIONS.UPGRADE));
+  return upgradeVersion.isGreater(currentVersion);
 };

@@ -86,13 +86,15 @@
         </div>
       </div>
       <div name="upgradeDiv" visible="false">
-        <label name="upgradeReason" size="9" color="#000000" font="arial"
-          width="100%" height="80" y="15" wordWrap="true"
-          trimming="character-ellipsis" />
-        <a name="upgradeDownloadUrl" size="10" font="arial"
-          width="100%" height="20" y="90">&DOWNLOAD_GADGET;</a>
-        <a name="upgradeInfoUrl" size="9" font="arial"
-          width="100%" height="20" y="115">&MORE_INFORMATION;</a>
+        <label height="80" name="upgradeReason" width="100%" y="15" font="arial"
+          size="9" trimming="character-ellipsis" wordwrap="true"
+         />
+        <a height="20" name="upgradeDownloadUrl" width="100%" y="90" font="arial"
+          size="10">&DOWNLOAD_GADGET;
+        </a>
+        <a height="20" name="upgradeInfoUrl" width="100%" y="115" font="arial"
+          size="9">&MORE_INFORMATION;
+        </a>
       </div>
     </div>
     <div height="16" name="loadingIndicator" width="70" visible="false"
@@ -100,7 +102,7 @@
       <label color="#FFFFFF" font="arial" size="10">&LOADING;
       </label>
     </div>
-   <img name="resizeIndicator" src="images/resize_indicator.png"/>
+    <img name="resizeIndicator" src="images/resize_indicator.png"/>
   </div>
   <script src="main.js" />
   <script src="auth.js" />
