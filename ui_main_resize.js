@@ -213,6 +213,16 @@ CalendarGadget.prototype.resizeBlueDialog = function() {
 };
 
 /**
+ * Resize and move the mandatory upgrade dialog
+ */
+CalendarGadget.prototype.resizeUpgradeDialog = function() {
+  upgradeDiv.x = 0;
+  upgradeDiv.y = 5;
+  upgradeDiv.width = mainDiv.width;
+  upgradeDiv.height = mainDiv.height - 10;
+};
+
+/**
  * Resize and move the login dialog
  */
 CalendarGadget.prototype.resizeLoginForm = function() {

@@ -14,6 +14,9 @@ var g_uiAgenda = null;
 var g_uiCal = null;
 var g_uiDayView = null;
 
+CalendarGadget.VERSION_CHECK_URL =
+    'http://desktop.google.com/plugins/versions/calendar.txt';
+
 /**
  * Class for the main gadget. Handles gadget events and syncs the views.
  * @constructor
@@ -30,6 +33,9 @@ function CalendarGadget() {
 
   this.detailsView = null;
   this.redrawTimer = null;
+  this.versionChecker = new VersionChecker(strings.GADGET_VERSION,
+      CalendarGadget.VERSION_CHECK_URL,
+      Utils.bind(this.onMandatoryUpgrade, this));
 }
 
 /**
@@ -157,6 +163,7 @@ CalendarGadget.prototype.resize = function() {
 
   this.resizeBlueDialog();
   this.resizeLoginForm();
+  this.resizeUpgradeDialog();
 };
 
 /**
@@ -296,6 +303,21 @@ CalendarGadget.prototype.onCalendarResized = function() {
 };
 
 /**
+ * Called when the version checker detects a mandatory upgrade.
+ */
+CalendarGadget.prototype.onMandatoryUpgrade = function(upgradeInfo) {
+  debug.warning('Received mandatory upgrade notice.');
+
+  this.logout();
+
+  upgradeReason.innerText = upgradeInfo.reason;
+  upgradeDownloadUrl.href = upgradeInfo.downloadUrl;
+  upgradeInfoUrl.href = upgradeInfo.infoUrl;
+
+  this.showUpgrade();
+};
+
+/**
  * Jump to today
  */
 CalendarGadget.prototype.goToday = function() {
@@ -412,6 +434,16 @@ CalendarGadget.prototype.logout = function() {
   g_events.stopTimer();
   this.drawUI();
   this.showLogin();
+};
+
+/**
+ * Show upgrade dialog to user.
+ */
+CalendarGadget.prototype.showUpgrade = function() {
+  footerDiv.visible = false;
+  dialogDiv.visible = true;
+  upgradeDiv.visible = true;
+  loginDiv.visible = false;
 };
 
 /**

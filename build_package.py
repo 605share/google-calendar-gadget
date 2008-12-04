@@ -30,6 +30,7 @@ FILES = [
   'ui_main_options.js',
   'ui_main_resize.js',
   'utils.js',
+  'version_checker.js',
   'en/strings.xml',
   'images/action_default.png',
   'images/action_down.png',
