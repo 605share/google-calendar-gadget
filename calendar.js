@@ -82,64 +82,26 @@ Calendar.prototype.getUpdateDate = function() {
  * @param {Object} elem DOM Element
  */
 Calendar.prototype.parse = function(elem) {
-  for (var node = elem.firstChild; node != null; node = node.nextSibling) {
-    var nodeName = node.nodeName;
-    switch (nodeName) {
-      case 'id':
-          if (node.firstChild) {
-            this.id = node.firstChild.nodeValue;
-          } else {
-            this.id = MSG_NO_TITLE;
-          }
-          break;
-      case 'title':
-          if (node.firstChild) {
-            this.title = node.firstChild.nodeValue;
-          } else {
-            this.title = MSG_NO_TITLE;
-          }
-          break;
-      case 'author':
-          for (var i = 0; i < node.childNodes.length; ++i) {
-            if (node.childNodes[i].nodeName == 'email') {
-              this.email = node.childNodes[1].firstChild.nodeValue;
-            }
-          }
-          break;
-      case 'link':
-          if (node.getAttribute('rel') == 'alternate') {
-            var url = node.getAttribute('href');
-            url = Utils.forceHttpsUrl(url);
-            this.url = url;
-          }
-          break;
-      case 'gCal:color':
-          this.color = node.getAttribute('value');
-          break;
-      case 'gCal:accesslevel':
-          this.accessLevel = node.getAttribute('value');
-          if (this.accessLevel != 'owner') {
-            options.putDefaultValue(OPTIONS.SHOW + this.id, false);
-          }
-          break;
-      case 'gCal:selected':
-          this.selected = (node.getAttribute('value') != 'false');
-          break;
-      case 'gCal:timezone':
-          this.timezone = node.getAttribute('value');
-          break;
-      case 'gCal:hidden':
-          this.hidden = (node.getAttribute('value') != 'false');
-          break;
-      case 'updated':
-          if (node.firstChild) {
-            this.updated =
-                Utils.rfc3339StringToDate(node.firstChild.nodeValue);
-          }
-          break;
-      case 'gCal:overridename':
-          this.overrideName = node.getAttribute('value');
-          break;
+  this.id = elem.id.$t;
+  this.title = elem.title.$t;
+  this.email = elem.author[0].email;
+  for (var i = 0; i < elem.link.length; ++i) {
+    if (elem.link[i].rel == 'alternate') {
+      var url = elem.link[i].href;
+      url = Utils.forceHttpsUrl(url);
+      this.url = url;
     }
+  }
+  this.color = elem.gCal$color.value;
+  this.accessLevel = elem.gCal$accesslevel.value;
+  if (this.accessLevel != 'owner') {
+    options.putDefaultValue(OPTIONS.SHOW + this.id, false);
+  }
+  this.selected = elem.gCal$selected.value;
+  this.timezone = elem.gCal$timezone.value;
+  this.hidden = elem.gCal$hidden.value == false;
+  this.updated = Utils.rfc3339StringToDate(elem.updated.$t);
+  if (elem.gCal$overridename) {
+    this.overrideName = elem.gCal$overridename.value;
   }
 };

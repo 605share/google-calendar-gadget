@@ -80,7 +80,7 @@ Events.prototype.getUserCalendars = function(opt_url) {
   }
 
   if (!opt_url) {
-    opt_url = CALENDAR_FEED_URL;
+    opt_url = CALENDAR_FEED_URL + "?alt=json";
   }
 
   Utils.showLoading();
@@ -116,31 +116,29 @@ Events.prototype.onGetUserCalendars = function(req) {
     g_auth.clearAuthToken();
     g_calendarGadget.showLogin();
   } else if (req.status == 200) {
-    var doc = Utils.createXmlDocument(req);
-    var feed = doc.getElementsByTagName('feed');
-    if (!feed || feed.length == 0) {
+    var data = jsonParse(req.responseText);
+
+    if (!data.feed || data.feed.length == 0) {
       // no <feed> element
       g_calendarGadget.showErrorMsg(ERROR_EMPTY_FEED);
       return;
     }
 
-    var elem = doc.getElementsByTagName('entry');
     g_cache.clearCalendarCache();
-    if (elem != null && elem.length > 0) {
-      for (var i = 0; i < elem.length; ++i) {
-        var cal = new Calendar();
-        cal.parse(elem[i]);
-        this.setCalendarMinutes(cal, true);
-        debug.info('Calendar parsed: ' + cal.url);
-        g_cache.addCalendar(cal);
+    for (var i = 0; i < data.feed.entry.length; ++i) {
+      var cal = new Calendar();
+      cal.parse(data.feed.entry[i]);
+      this.setCalendarMinutes(cal, true);
+      debug.info('Calendar parsed: ' + cal.url);
+      g_cache.addCalendar(cal);
 
-        var d = new Date();
-        var start = new Date(d.getFullYear(), d.getMonth(), 1);
-        var end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+      var d = new Date();
+      var start = new Date(d.getFullYear(), d.getMonth(), 1);
+      var end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
 
-        this.getEventsFromServer(cal, start, end);
-      }
+      this.getEventsFromServer(cal, start, end);
     }
+
     debug.info(g_cache.getCalendarCount() + ' calendars total');
 
     if (typeof(this.onCalendarsReceived) == 'function') {
