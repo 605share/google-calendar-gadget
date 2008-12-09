@@ -80,7 +80,7 @@ Events.prototype.getUserCalendars = function(opt_url) {
   }
 
   if (!opt_url) {
-    opt_url = CALENDAR_FEED_URL + "?alt=json";
+    opt_url = CALENDAR_FEED_URL;
   }
 
   Utils.showLoading();

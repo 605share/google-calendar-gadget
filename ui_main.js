@@ -226,9 +226,9 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
  * @param {Auth} auth Instance of authentication class
  */
 CalendarGadget.prototype.onLoginSuccess = function(auth) {
+  Utils.hideLoading();
   g_events.getUserCalendars();
   g_events.startTimer();
-  Utils.hideLoading();
   this.goToday();
 };
 
