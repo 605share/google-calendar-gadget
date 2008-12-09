@@ -1,9 +1,9 @@
 ﻿<view height="335" width="250" onok="options_store()" onopen="options_onOpen()"
  >
-  <label height="16" name="labelChoose" width="112" x="10" y="10">&OPTION_VIEWS;
+  <label height="20" name="labelChoose" width="112" x="10" y="10">&OPTION_VIEWS;
   </label>
   <combobox height="100" name="optionView" width="115" x="125" y="10" background="#FFFFFF"
-    itemSeparator="true" selectedIndex="0" itemWidth="100"
+    itemSeparator="false" selectedIndex="0" itemWidth="100%"
     itemHeight="18" type="droplist" value="&CALENDAR_VIEW;">
     <item height="18" width="100" selected="true">
       <label valign="middle">&CALENDAR_VIEW;
@@ -18,18 +18,18 @@
       </label>
     </item>
   </combobox>
-  <checkbox cursor="hand" height="16" name="option24Hour" width="230" x="10"
+  <checkbox cursor="hand" height="16" name="option24Hour" width="230" x="13"
     y="60" font="arial" size="9" trimming="word-ellipsis" downImage="images/checkbox_default.png"
     image="images/checkbox_default.png" overImage="images/checkbox_default.png"
     caption="&OPTION_TIME;" checkedDownImage="images/checkbox_checked.png"
     checkedImage="images/checkbox_checked.png" checkedOverImage="images/checkbox_checked.png"
     value="false"/>
-  <label height="16" name="labelWeekStart" width="115" x="10" y="35">
+  <label height="20" name="labelWeekStart" width="115" x="10" y="35">
     &OPTION_WEEKSTART;
   </label>
   <combobox height="100" name="optionWeekStart" width="115" x="125" y="35"
-    background="#FFFFFF" itemSeparator="true" selectedIndex="0"
-    itemWidth="100" itemHeight="18" type="droplist" value="&DAY_SAT;"
+    background="#FFFFFF" itemSeparator="false" selectedIndex="0"
+    itemWidth="100%" itemHeight="18" type="droplist" value="&DAY_SAT;"
    >
     <item height="18" width="100" selected="true">
       <label valign="middle">&DAY_SAT;
