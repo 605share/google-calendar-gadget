@@ -127,10 +127,10 @@ CalendarGadget.prototype.resizeDesign = function() {
   mainDiv.height = view.height - 10;
 
   // Move and resize the white background div.
-  background.width = mainDiv.width;
+  background.x = base_left.srcWidth;
   background.y = base_top.srcHeight;
-  background.height = view.height - mainDiv.y - base_top.srcHeight -
-      base_bottom.srcHeight;
+  background.width = view.width - base_left.srcWidth - base_right.srcWidth;
+  background.height = view.height - base_top.srcHeight - base_bottom.srcHeight;
 
   // Move and resize the footer. Move the left and right images to the
   // correct positions and resize background image.

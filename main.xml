@@ -1,5 +1,5 @@
 ﻿<view height="355" resizable="true" width="160" onopen="view_onOpen()"
- >
+  resizeBorder="8">
   <img name="base_topleft" src="images\base_topleft.png"/>
   <img name="base_topright" src="images\base_topright.png"/>
   <img name="base_bottomleft" src="images\base_bottomleft.png"/>
@@ -9,8 +9,8 @@
   <img name="base_right" src="images\base_right.png"/>
   <img name="base_bottom" src="images\base_bottom.png"/>
   <edit name="sizeCalc" visible="false" x="10" y="10"/>
+  <div name="background" background="#FFFFFF"/>
   <div name="mainDiv">
-    <div name="background" background="#FFFFFF"/>
     <div name="agendaDiv"/>
     <div name="footerDiv">
       <img name="footerLeft" src="images\footer_left.png"/>
