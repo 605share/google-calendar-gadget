@@ -262,9 +262,10 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
   dialogDiv.visible = false;
   footerDiv.visible = true;
 
+  Utils.hideLoading();
+
   // The show/hide options is not available on the mac.
   if (Utils.isMac()) {
-    plugin.onShowOptionsDlg = Utils.bind(this.showOptionsDlg, this);
     return;
   }
 
@@ -276,8 +277,6 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
   tooltip = tooltip.replace('[![USERNAME]!]',
       options.getValue(OPTIONS.MAIL));
   linkOptions.tooltip = tooltip;
-
-  Utils.hideLoading();
 };
 
 /**
@@ -431,11 +430,11 @@ CalendarGadget.prototype.setView = function(itemtext) {
  * Logout user from gadget
  */
 CalendarGadget.prototype.logout = function() {
-  plugin.onShowOptionsDlg = null;
   g_auth.clearAuthToken();
   g_cache.clearCalendarCache();
   g_cache.clearEventCache();
   g_events.stopTimer();
+  options.putValue(OPTIONS.CALENDARDATA, '');
   this.drawUI();
   this.showLogin();
 };
@@ -738,6 +737,12 @@ CalendarGadget.prototype.onOptionChanged = function() {
     case OPTIONS.UPDATE_RSVP_TRIGGER:
         g_events.updateCheck(new Date(), true);
         break;
+    case OPTIONS.UPDATE_VIEW:
+        this.resize();
+        break;
   }
 };
 
+CalendarGadget.prototype.showOptions = function() {
+  plugin.showOptionsDialog();
+};

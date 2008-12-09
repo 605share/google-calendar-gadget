@@ -116,6 +116,7 @@ Events.prototype.onGetUserCalendars = function(req) {
     g_auth.clearAuthToken();
     g_calendarGadget.showLogin();
   } else if (req.status == 200) {
+    options.putValue(OPTIONS.CALENDARDATA, req.responseText);
     var data = jsonParse(req.responseText);
 
     if (!data.feed || data.feed.length == 0) {

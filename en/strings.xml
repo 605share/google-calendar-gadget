@@ -171,6 +171,7 @@ It's easy to start.</NO_ACCOUNT>
   <OTHER_CALENDARS>Other calendars</OTHER_CALENDARS>
   <OPTIONS_TOOLTIP>Choose the visible calendars for [![USERNAME]!]</OPTIONS_TOOLTIP>
   <OPTIONS_LINK>Options</OPTIONS_LINK>
+  <OPTIONS_ERROR_LOGIN>Please login to change the visibility of your calendars.</OPTIONS_ERROR_LOGIN>
 
   <MORE_INFORMATION>More information</MORE_INFORMATION>
   <DOWNLOAD_GADGET>Download new gadget</DOWNLOAD_GADGET>

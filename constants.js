@@ -71,7 +71,9 @@ var OPTIONS = {
   UPGRADE: 'mandatoryUpgrade',
   UPGRADE_REASON: 'upgradeReason',
   UPGRADE_URL: 'upgradeUrl',
-  UPGRADE_INFO: 'upgradeInfo'
+  UPGRADE_INFO: 'upgradeInfo',
+  CALENDARDATA: 'calendarJson',
+  UPDATE_VIEW: 'updateView'
 };
 
 // Days the week can start on.
