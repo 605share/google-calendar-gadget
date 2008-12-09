@@ -269,7 +269,6 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
     return;
   }
 
-  plugin.onShowOptionsDlg = Utils.bind(this.showOptionsDlg, this);
   linkOptions.visible = (g_cache.getCalendarCount() > 0) &&
       !(linkOptions.x < linkAddEvent.x + linkAddEvent.width);
   linkAddEvent.visible = g_cache.getCalendarCount() > 0;

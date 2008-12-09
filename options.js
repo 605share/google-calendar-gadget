@@ -1,9 +1,7 @@
-﻿var g_options = new OptionsDlg();
-var g_auth = null;
-var g_cache = null;
-var g_events = null;
+﻿var g_options = null;
 
 function options_onOpen() {
+  g_options = new OptionsDlg();
   g_options.init();
 }
 
@@ -142,5 +140,4 @@ OptionsDlg.prototype.save = function() {
   options.putValue(OPTIONS.WEEKSTART, optionWeekStart.selectedIndex - 1);
   options.putValue(OPTIONS.HOUR24, option24Hour.value);
   options.putValue(OPTIONS.UPDATE_VIEW, true);
-
 };
