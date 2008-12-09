@@ -119,7 +119,6 @@
   <script src="ui_calendar.js" />
   <script src="ui_dayview.js" />
   <script src="ui_main.js" />
-  <script src="ui_main_options.js" />
   <script src="ui_main_resize.js" />
   <script src="version_checker.js" />
 </view>
