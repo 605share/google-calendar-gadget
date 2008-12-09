@@ -177,7 +177,7 @@ CalendarGadget.prototype.resizeDesign = function() {
   }
 
   sizeCalc.value = strings.LOADING;
-  loadingIndicator.width = sizeCalc.idealBoundingRect.width;
+  loadingIndicator.width = sizeCalc.idealBoundingRect.width + 10;
   loadingIndicator.x = mainDiv.width / 2 - loadingIndicator.width / 2;
 
   resizeIndicator.x = mainDiv.width - resizeIndicator.srcWidth;

@@ -97,9 +97,9 @@
         </a>
       </div>
     </div>
-    <div height="16" name="loadingIndicator" width="70" visible="false"
-      x="10" y="0" background="#FF0000">
-      <label color="#FFFFFF" font="arial" size="10">&LOADING;
+    <div height="18" name="loadingIndicator" width="70" visible="false"
+      x="10" y="0" background="#CC4444">
+      <label color="#FFFFFF" font="arial" size="10" height="100%">&LOADING;
       </label>
     </div>
     <img name="resizeIndicator" src="images/resize_indicator.png"/>
