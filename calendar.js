@@ -97,9 +97,9 @@ Calendar.prototype.parse = function(elem) {
   if (this.accessLevel != 'owner') {
     options.putDefaultValue(OPTIONS.SHOW + this.id, false);
   }
-  this.selected = elem.gCal$selected.value;
+  this.selected = elem.gCal$selected.value == 'true';
   this.timezone = elem.gCal$timezone.value;
-  this.hidden = elem.gCal$hidden.value == false;
+  this.hidden = elem.gCal$hidden.value == 'true';
   this.updated = Utils.rfc3339StringToDate(elem.updated.$t);
   if (elem.gCal$overridename) {
     this.overrideName = elem.gCal$overridename.value;

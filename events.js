@@ -201,7 +201,7 @@ Events.prototype.getEventsFromServer = function(calendar, startDate, endDate) {
   }
 
   if (!calendar.isSelected()) {
-    // We don't need events for a hidden calendar
+    // We don't need events for a non-selected calendar
     //g_cache.setEventsForCalendarRange(calendar, startDate, endDate, []);
     return;
   }
