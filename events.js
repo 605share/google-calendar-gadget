@@ -90,6 +90,11 @@ Events.prototype.getUserCalendars = function(opt_url) {
   req.onReadyStateChange = Utils.bind(this.onGetUserCalendars, this, req);
   req.setRequestHeader('Authorization',
       'GoogleLogin auth=' + g_auth.getAuthToken());
+  // MS XHR does not send auth headers when it automaticaly follows a 302.
+  // By setting this header, we instead get a 412 and can redirect manually.
+  // See:
+  // http://groups.google.com/group/google-calendar-help-dataapi/tree/browse_frm/month/2006-07/599f6774d43e5362
+  req.setRequestHeader('X-If-No-Redirect', '1');
   req.setRequestHeader('If-Modified-Since', 'Sat, 1 Jan 2000 00:00:00 GMT');
   req.send();
 };
@@ -106,7 +111,7 @@ Events.prototype.onGetUserCalendars = function(req) {
   if (req.status == 412) {
     // we've been redirected
     debug.trace('Redirecting user to new location');
-    var location = xmlReq.getResponseHeader('X-Redirect-Location');
+    var location = req.getResponseHeader('X-Redirect-Location');
     this.getUserCalendars(location);
   } else if (req.status == 401) {
     g_auth.clearAuthToken();
