@@ -16,7 +16,7 @@ function view_onopen() {
   g_addEvent.fillCalendarList();
   g_addEvent.presetDates();
 
-  setTimeout(eventTitle.focus(), 100);
+  setTimeout(function () { eventTitle.focus(); }, 100);
 }
 
 /**
