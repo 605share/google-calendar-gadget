@@ -84,7 +84,7 @@ Calendar.prototype.getUpdateDate = function() {
 Calendar.prototype.parse = function(elem) {
   this.id = elem.id.$t;
   this.title = elem.title.$t;
-  this.email = elem.author[0].email.$t;
+  this.email = elem.author[0].email ? elem.author[0].email.$t : '';
   for (var i = 0; i < elem.link.length; ++i) {
     if (elem.link[i].rel == 'alternate') {
       var url = elem.link[i].href;
