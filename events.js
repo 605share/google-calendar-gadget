@@ -200,7 +200,7 @@ Events.prototype.getEventsFromServer = function(calendar, startDate, endDate) {
     return;
   }
 
-  if (!calendar.isVisible()) {
+  if (!calendar.isSelected()) {
     // We don't need events for a hidden calendar
     //g_cache.setEventsForCalendarRange(calendar, startDate, endDate, []);
     return;
