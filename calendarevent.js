@@ -184,7 +184,7 @@ CalendarEvent.prototype.parse = function(elem) {
           this.originalId = node.getAttribute('id');
           break;
       case 'author':
-          if (node.firstChild.nodeName == 'name') {
+          if (node.firstChild && node.firstChild.nodeName == 'name') {
             this.creator = node.firstChild.firstChild.nodeValue;
           }
           break;
