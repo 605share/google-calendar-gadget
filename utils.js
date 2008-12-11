@@ -1,4 +1,4 @@
-// Copyright (C) 2008 Google Inc.
+﻿// Copyright (C) 2008 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -271,7 +271,7 @@ Utils.formatEventTimes = function(event, opt_break) {
     endStr = endStr.replace('[![DAY]!]',
         endDate.getDate());
 
-    dateStr = startStr + ' – ' + endStr;
+    dateStr = startStr + ' - ' + endStr;
   } else {
     var startStr = strings.EVENT_DATE_TIME;
     startStr = startStr.replace('[![WEEKDAY]!]',
@@ -293,7 +293,7 @@ Utils.formatEventTimes = function(event, opt_break) {
     endStr = endStr.replace('[![TIME]!]',
         Utils.formatTime(event.endTime, true));
 
-    dateStr = startStr + ' – ' + (opt_break ? '\n' : '') + endStr;
+    dateStr = startStr + ' - ' + (opt_break ? '\n' : '') + endStr;
   }
   return dateStr;
 };
