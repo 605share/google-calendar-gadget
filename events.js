@@ -80,6 +80,8 @@ Events.prototype.stopTimer = function() {
  * @param {string} opt_url Request URL. Needed for redirects.
  */
 Events.prototype.getUserCalendars = function(opt_url) {
+  debug.trace('Get user calendars.');
+
   if (!Utils.isOnline()) {
     g_calendarGadget.showErrorMsg(strings.OFFLINE);
     return;
@@ -142,25 +144,8 @@ Events.prototype.onGetUserCalendars = function(req) {
       return;
     }
 
-    g_cache.clearCalendarCache();
-    for (var i = 0; i < data.feed.entry.length; ++i) {
-      var cal = new Calendar();
-      cal.parse(data.feed.entry[i]);
-      this.setCalendarMinutes(cal, true);
-      debug.info('Calendar parsed: ' + cal.url);
-      g_cache.addCalendar(cal);
-
-      var d = new Date();
-      var start = new Date(d.getFullYear(), d.getMonth(), 1);
-      var end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
-
-      this.getEventsFromServer(cal, start, end);
-    }
-
-    debug.info(g_cache.getCalendarCount() + ' calendars total');
-
     if (typeof(this.onCalendarsReceived) == 'function') {
-      this.onCalendarsReceived();
+      this.onCalendarsReceived(data);
     }
   }
 };

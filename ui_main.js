@@ -48,6 +48,7 @@ function CalendarGadget() {
   this.versionChecker = new VersionChecker(strings.GADGET_VERSION,
       CalendarGadget.VERSION_CHECK_URL,
       Utils.bind(this.onMandatoryUpgrade, this));
+  this.ownCalendarsUrls = {};
 }
 
 /**
@@ -68,7 +69,8 @@ CalendarGadget.prototype.run = function() {
 
   g_events = new Events();
   g_events.onEventsReceived = Utils.bind(this.onEventsReceived, this);
-  g_events.onCalendarsReceived = Utils.bind(this.onCalendarsReceived, this);
+  // Retrieve only self-owned calendars at first.
+  g_events.onCalendarsReceived = Utils.bind(this.onOwnCalendarsReceived, this);
 
   g_auth = new Auth();
   g_auth.onLoginFailure = Utils.bind(this.onLoginFailure, this);
@@ -212,7 +214,7 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
         break;
     case auth.CAPTCHA_REQUIRED:
         var captchaUrl = auth.CAPTCHA_PAGE +
-                         auth.authResponse.CaptchaUrl
+                         auth.authResponse.CaptchaUrl;
         this.showLogin(captchaUrl, true);
         break;
     case auth.UNKNOWN:
@@ -239,7 +241,7 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
  */
 CalendarGadget.prototype.onLoginSuccess = function(auth) {
   Utils.hideLoading();
-  g_events.getUserCalendars();
+  g_events.getUserCalendars(CALENDAR_OWN_FEED_URL);
   g_events.startTimer();
   this.goToday();
 };
@@ -267,10 +269,36 @@ CalendarGadget.prototype.onDateSelected = function() {
   this.resize();
 };
 
+CalendarGadget.prototype.processCalendar = function(cal) {
+    g_events.setCalendarMinutes(cal, true);
+    debug.info('Calendar parsed: ' + cal.url);
+    g_cache.addCalendar(cal);
+
+    var d = new Date();
+    var start = new Date(d.getFullYear(), d.getMonth(), 1);
+    var end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+
+    g_events.getEventsFromServer(cal, start, end);
+};
+
 /**
  * Callback function after all calendars were received.
  */
-CalendarGadget.prototype.onCalendarsReceived = function() {
+CalendarGadget.prototype.onOwnCalendarsReceived = function(data) {
+  g_cache.clearCalendarCache();
+  var entriesLength = data.feed.entry.length;
+  for (var i = 0; i < entriesLength; ++i) {
+    var cal = new Calendar();
+    cal.parse(data.feed.entry[i]);
+    this.processCalendar(cal);
+
+    // Keep track of calendars we've processed, so we don't process them
+    // when we retrieve the complete list later.
+    this.ownCalendarsUrls[cal.url] = true;
+  }
+
+  debug.info(g_cache.getCalendarCount() + ' own calendars');
+
   dialogDiv.visible = false;
   footerDiv.visible = true;
 
@@ -288,6 +316,36 @@ CalendarGadget.prototype.onCalendarsReceived = function() {
   tooltip = tooltip.replace('[![USERNAME]!]',
       options.getValue(OPTIONS.MAIL));
   linkOptions.tooltip = tooltip;
+
+  // Now get the rest.
+  g_events.onCalendarsReceived = Utils.bind(this.onCalendarsReceived, this);
+  g_events.getUserCalendars();
+};
+
+CalendarGadget.prototype.onCalendarsReceived = function(data) {
+  this.processCalendarsWithDelay(data, 0);
+};
+
+CalendarGadget.CALENDAR_PROCESS_DELAY = 200;
+
+CalendarGadget.prototype.processCalendarsWithDelay = function(data, i) {
+  var entriesLength = data.feed.entry.length;
+
+  if (i >= entriesLength) {
+    return;
+  }
+
+  var cal = new Calendar();
+  cal.parse(data.feed.entry[i]);
+
+  if (this.ownCalendarsUrls[cal.url]) {
+    debug.info('Calendar already processed');
+  } else {
+    this.processCalendar(cal);
+  }
+
+  view.setTimeout(Utils.bind(this.processCalendarsWithDelay, this, data, ++i),
+      CalendarGadget.CALENDAR_PROCESS_DELAY);
 };
 
 /**
@@ -509,7 +567,7 @@ CalendarGadget.prototype.showLogin = function(opt_captcha, opt_focus) {
 
     user.value = options.getValue(OPTIONS.MAIL);
     if (opt_focus) {
-      if (user.value.length == 0) {
+      if (user.value.length === 0) {
         user.focus();
       } else {
         pass.focus();
@@ -553,9 +611,7 @@ CalendarGadget.prototype.loginKeyPress = function(ele) {
           break;
     }
     event.returnValue = false;
-  } else 
-
-  if (event.keyCode == 32) {
+  } else if (event.keyCode == 32) {
     switch (ele) {
       case 'remember':
           remember.value = !remember.value;
@@ -649,7 +705,7 @@ CalendarGadget.prototype.quickAddEvent = function() {
   }
 
   debug.trace('Show add event dialog');
-  if (this.detailsView != null) {
+  if (this.detailsView !== null) {
     plugin.closeDetailsView();
     this.detailsView = null;
     return;
@@ -700,8 +756,8 @@ CalendarGadget.prototype.onOptionChanged = function() {
         }
         break;
     case OPTIONS.QUICKADD:
-        calEvent = options.getValue(OPTIONS.QUICKADD);
-        if (calEvent != '') {
+        var calEvent = options.getValue(OPTIONS.QUICKADD);
+        if (calEvent !== '') {
           // Store empty string since Google Desktop cannot save objects in 
           // the options.
           options.putValue(OPTIONS.QUICKADD, '');

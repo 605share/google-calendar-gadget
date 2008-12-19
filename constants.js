@@ -18,6 +18,7 @@
 
 var CALENDAR_URL = 'https://calendar.google.com/';
 var CALENDAR_FEED_URL = 'https://www.google.com/calendar/feeds/default?alt=json';
+var CALENDAR_OWN_FEED_URL = 'http://www.google.com/calendar/feeds/default/owncalendars/full?alt=json';
 var CALENDAR_POST_URL =
     'https://www.google.com/calendar/feeds/default/private/full';
 var CALENDAR_HOSTED = 'https://www.google.com/calendar/hosted/[DOMAIN]/render';
