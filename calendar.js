@@ -94,9 +94,9 @@ Calendar.prototype.getUpdateDate = function() {
  * @param {Object} elem DOM Element
  */
 Calendar.prototype.parse = function(elem) {
-  this.id = elem.id.$t;
-  this.title = elem.title.$t;
-  this.email = elem.author[0].email ? elem.author[0].email.$t : '';
+  this.id = this.get$t(elem.id);
+  this.title = this.get$t(elem.title);
+  this.email = this.get$t(elem.author[0].email);
   for (var i = 0; i < elem.link.length; ++i) {
     if (elem.link[i].rel == 'alternate') {
       var url = elem.link[i].href;
@@ -104,16 +104,25 @@ Calendar.prototype.parse = function(elem) {
       this.url = url;
     }
   }
-  this.color = elem.gCal$color.value;
-  this.accessLevel = elem.gCal$accesslevel.value;
+  this.color = this.getVal(elem.gCal$color);
+  this.accessLevel = this.getVal(elem.gCal$accesslevel);
   if (this.accessLevel != 'owner') {
     options.putDefaultValue(OPTIONS.SHOW + this.id, false);
   }
-  this.selected = elem.gCal$selected.value == 'true';
-  this.timezone = elem.gCal$timezone.value;
-  this.hidden = elem.gCal$hidden.value == 'true';
-  this.updated = Utils.rfc3339StringToDate(elem.updated.$t);
-  if (elem.gCal$overridename) {
-    this.overrideName = elem.gCal$overridename.value;
-  }
+  this.selected = this.getVal(elem.gCal$selected) == 'true';
+  this.timezone = this.getVal(elem.gCal$timezone);
+  this.hidden = this.getVal(elem.gCal$hidden) == 'true';
+  this.updated = Utils.rfc3339StringToDate(this.get$t(elem.updated));
+  this.overrideName = this.getVal(elem.gCal$overridename);
+};
+
+/**
+ * Retrieve value of calendar attribute if available in JSON
+ */
+Calendar.prototype.getVal = function(obj) {
+  return obj ? obj.value : '';
+};
+
+Calendar.prototype.get$t = function(obj) {
+  return obj ? obj.$t : '';
 };
