@@ -69,8 +69,6 @@ CalendarGadget.prototype.run = function() {
 
   g_events = new Events();
   g_events.onEventsReceived = Utils.bind(this.onEventsReceived, this);
-  // Retrieve only self-owned calendars at first.
-  g_events.onCalendarsReceived = Utils.bind(this.onOwnCalendarsReceived, this);
 
   g_auth = new Auth();
   g_auth.onLoginFailure = Utils.bind(this.onLoginFailure, this);
@@ -241,6 +239,8 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
  */
 CalendarGadget.prototype.onLoginSuccess = function(auth) {
   Utils.hideLoading();
+    // Retrieve only self-owned calendars at first.
+  g_events.onCalendarsReceived = Utils.bind(this.onOwnCalendarsReceived, this);
   g_events.getUserCalendars(CALENDAR_OWN_FEED_URL);
   g_events.startTimer();
   this.goToday();
