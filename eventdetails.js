@@ -405,7 +405,8 @@ EventDetails.prototype.onGoingResponse = function() {
   }
 
   // Add the event to the options so the update is triggered
-  options.putValue(OPTIONS.UPDATE_RSVP_TRIGGER, true);
+  options.putValue(OPTIONS.UPDATE_RSVP_TRIGGER,
+      options.getValue(OPTIONS.UPDATE_RSVP_TRIGGER) !== true);
 };
 
 /**

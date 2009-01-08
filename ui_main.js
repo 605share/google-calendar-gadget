@@ -802,16 +802,10 @@ CalendarGadget.prototype.onOptionChanged = function() {
         }
         break;
     case OPTIONS.UPDATE_RSVP_TRIGGER:
-        if (options.getValue(OPTIONS.UPDATE_RSVP_TRIGGER)) {
-          options.putValue(OPTIONS.UPDATE_RSVP_TRIGGER, false);
-          g_events.updateCheck(new Date(), true);
-        }
+        g_events.updateCheck(new Date(), true);
         break;
     case OPTIONS.UPDATE_VIEW:
-        if (options.getValue(OPTIONS.UPDATE_VIEW)) {
-          options.putValue(OPTIONS.UPDATE_VIEW, false);
-          this.resize();
-        }
+        this.resize();
         break;
   }
 };

@@ -153,5 +153,6 @@ OptionsDlg.prototype.save = function() {
 
   options.putValue(OPTIONS.WEEKSTART, optionWeekStart.selectedIndex - 1);
   options.putValue(OPTIONS.HOUR24, option24Hour.value);
-  options.putValue(OPTIONS.UPDATE_VIEW, true);
+  options.putValue(OPTIONS.UPDATE_VIEW,
+      options.getValue(OPTIONS.UPDATE_VIEW) !== true);
 };
