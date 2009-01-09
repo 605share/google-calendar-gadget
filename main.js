@@ -39,6 +39,7 @@ function view_onOpen() {
   options.putDefaultValue(OPTIONS.AUTH, '');
   options.putDefaultValue(OPTIONS.USE_QUICK_ADD, false);
   options.putDefaultValue(OPTIONS.UPGRADE, strings.GADGET_VERSION);
+  options.putValue(OPTIONS.CLOSE_DETAILS, false);
 
   g_calendarGadget = new CalendarGadget();
   g_calendarGadget.run();
