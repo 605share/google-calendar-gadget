@@ -46,6 +46,9 @@ function AddEventDialog() {
   btnSave.onclick = Utils.bind(this.onSubmit, this);
   eventAllDay.onchange = Utils.bind(this.onAllDayChange, this);
 
+  // Scrollbar code is not available in versions below 5.8
+  if (!eventCalendar.scrollbar) return;
+
   var scrollbar = eventCalendar.scrollbar;
   scrollbar.background = "images/scroll-bar.gif";
   scrollbar.thumbImage = "images/scroll-track.gif";

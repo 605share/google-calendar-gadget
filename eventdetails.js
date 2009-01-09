@@ -42,6 +42,8 @@ function EventDetails() {
   imgClose.onclick = Utils.bind(this.close, this);
 
   // Apply custom scrollbars
+  // Scrollbar code is not available in versions below 5.8
+  if (!eventDescription.scrollbar) return;
   var scrollbar;
   scrollbar = eventDescription.scrollbar;
   scrollbar.background = "images/scroll-bar.gif";
