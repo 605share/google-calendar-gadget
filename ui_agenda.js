@@ -551,6 +551,8 @@ Agenda.prototype.onEventClicked = function(event) {
     return;
   }
 
+  options.putValue(OPTIONS.CLOSE_DETAILS, false);
+
   this.lastEvent = event;
 
   var detailsView = new DetailsView();

@@ -710,6 +710,9 @@ CalendarGadget.prototype.quickAddEvent = function() {
     this.detailsView = null;
     return;
   }
+
+  options.putValue(OPTIONS.CLOSE_DETAILS, false);
+
   this.detailsView = new DetailsView();
   if (options.getValue(OPTIONS.USE_QUICK_ADD)) {
     this.detailsView.SetContent('', undefined, 'quickadd.xml', false, 0);
