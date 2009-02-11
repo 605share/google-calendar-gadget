@@ -1,4 +1,4 @@
-// Copyright (C) 2008 Google Inc.
+﻿// Copyright (C) 2008 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -197,7 +197,7 @@ Events.prototype.getCalendarTextColor = function(calId) {
  * @param {Date} endDate End time of the timeframe
  */
 Events.prototype.getEventsFromServer = function(calendar, startDate, endDate) {
-  if (!framework.system.network.online) {
+  if (!Utils.isOnline()) {
     g_calendarGadget.showErrorMsg(strings.OFFLINE);
     return;
   }
@@ -430,7 +430,7 @@ Events.prototype.reminderCheck = function(now) {
  * @param {Calendar} calendar Calendar to retrieve data from
  */
 Events.prototype.getUpdatesFromServer = function(calendar) {
-  if (!framework.system.network.online) {
+  if (!Utils.isOnline()) {
     g_calendarGadget.showErrorMsg(strings.OFFLINE);
     return;
   }
@@ -547,7 +547,7 @@ Events.prototype.getToolTip = function(date) {
   for (var e = 0; e < events.length; ++e) {
     var title = events[e].title;
     if (title.length > this.TOOLTIP_LENGTH) {
-      title = title.substr(0, this.TOOLTIP_LENGTH - 1) + '…';
+      title = title.substr(0, this.TOOLTIP_LENGTH - 1) + 'â€¦';
     }
     var tip = Utils.formatTime(events[e].startTime) + '\t' + title;
     tooltips.push(tip);
