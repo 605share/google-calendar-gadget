@@ -376,7 +376,9 @@ Utils.createXmlDocument = function(request) {
  * @return {boolean} True, if connected.
  */
 Utils.isOnline = function() {
-  return framework.system.network.online;
+  // framework.system.network.online;
+  // Assume always online until above API path works 100%
+  return true;
 };
 
 /**

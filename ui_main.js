@@ -193,14 +193,13 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
         this.showErrorMsg(strings.OFFLINE);
         break;
     case auth.NO_CREDENTIALS:
-        this.showLogin(null, false);
         break;
     case auth.MANDATORY_UPGRADE:
         this.showUpgrade();
+        return;
         break;
     case auth.BAD_AUTHENTICATION:
         this.showErrorMsg(strings.ERROR_BAD_AUTHENTICATION);
-        this.showLogin(null, true);
         break;
     case auth.NOT_VERIFIED:
         this.showErrorMsg(strings.ERROR_NOT_VERIFIED);
@@ -214,10 +213,10 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
         var captchaUrl = auth.CAPTCHA_PAGE +
                          auth.authResponse.CaptchaUrl;
         this.showLogin(captchaUrl, true);
+        return;
         break;
     case auth.UNKNOWN:
         this.showErrorMsg(strings.ERROR_UNKNOWN);
-        this.showLogin(null, true);
         break;
     case auth.ACCOUNT_DISABLED:
     case auth.ACCOUNT_DISABLED:
@@ -228,9 +227,9 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
         this.showErrorMsg(strings.ERROR_SERVICE_UNAVAILABLE);
         break;
     default:
-        this.showLogin(null, true);
         break;
   }
+  this.showLogin(null, false);
 };
 
 /**

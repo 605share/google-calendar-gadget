@@ -201,6 +201,8 @@ Auth.prototype.onLoginDone = function(req) {
     if (typeof(this.onLoginFailure) == 'function') {
       this.onLoginFailure(this);
     }
+  } else if (req.status > 12000) {
+    this.returnError(this.OFFLINE);
   } else {
     if (typeof(this.onLoginFailure) == 'function') {
       this.onLoginFailure(this);
