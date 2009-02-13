@@ -305,6 +305,8 @@ Events.prototype.onReceiveEvents = function(req, calendar, startDate, endDate) {
     setTimeout(Utils.bind(this.getEventsFromServer, this, calendar, startDate,
         endDate), this.nextRetry);
     this.backoffLastRetry();
+  } else {
+    Utils.hideLoading();
   }
 };
 
@@ -511,6 +513,8 @@ Events.prototype.onReceiveUpdates = function(req, calendar) {
           Utils.rfc3339StringToDate(node.firstChild.nodeValue);
       calendar.setUpdateDate();
     }
+  } else {
+    Utils.hideLoading();
   }
 };
 
