@@ -551,7 +551,7 @@ Events.prototype.getToolTip = function(date) {
   for (var e = 0; e < events.length; ++e) {
     var title = events[e].title;
     if (title.length > this.TOOLTIP_LENGTH) {
-      title = title.substr(0, this.TOOLTIP_LENGTH - 1) + 'â€¦';
+      title = title.substr(0, this.TOOLTIP_LENGTH - 1) + '…';
     }
     var tip = Utils.formatTime(events[e].startTime) + '\t' + title;
     tooltips.push(tip);
