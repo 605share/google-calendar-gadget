@@ -219,7 +219,6 @@ CalendarGadget.prototype.onLoginFailure = function(auth) {
         this.showErrorMsg(strings.ERROR_UNKNOWN);
         break;
     case auth.ACCOUNT_DISABLED:
-    case auth.ACCOUNT_DISABLED:
     case auth.SERVICE_DISABLED:
         this.showErrorMsg(strings.ERROR_ACCOUNT_DISABLED_OR_DELETED);
         break;
