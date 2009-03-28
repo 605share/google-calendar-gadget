@@ -1,7 +1,7 @@
 ﻿<strings>
-  <GADGET_NAME>Google Calendar</GADGET_NAME>
+  <GADGET_NAME>Google Calendar gadget</GADGET_NAME>
   <GADGET_DESCRIPTION>Google Calendar on your desktop</GADGET_DESCRIPTION>
-  <GADGET_ABOUT_TEXT>Google Calendar
+  <GADGET_ABOUT_TEXT>Google Calendar gadget
 Copyright (c) 2009 Google Inc. All Rights Reserved.
 Keep track of your calendar events.
 Choose between month view, daily view, and agenda view.
@@ -12,7 +12,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 This gadget was created by Google and is maintained by the open-source community
 http://code.google.com/p/google-calendar-gadget/
 </GADGET_ABOUT_TEXT>
-  <GADGET_VERSION>1.0.0.0</GADGET_VERSION>
+  <GADGET_VERSION>1.0.0.2</GADGET_VERSION>
 
   <!-- Text used in the login dialog -->
   <SIGN_IN_TO_CALENDAR>Sign in to Calendar with</SIGN_IN_TO_CALENDAR>
