@@ -371,14 +371,18 @@ Utils.createXmlDocument = function(request) {
   }
 }
 
+Utils.onlineChecker = null;
+
 /**
  * Check if user is currently connected to the internet
  * @return {boolean} True, if connected.
  */
 Utils.isOnline = function() {
-  // framework.system.network.online;
-  // Assume always online until above API path works 100%
-  return true;
+  if (!Utils.onlineChecker) {
+    Utils.onlineChecker = new OnlineChecker();
+  }
+
+  return Utils.onlineChecker.isOnline();
 };
 
 /**

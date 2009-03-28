@@ -21,6 +21,7 @@ FILES = [
   'json_sans_eval.js',
   'main.js',
   'main.xml',
+  'online_checker.js',
   'options.js',
   'options.xml',
   'quickadd.js',

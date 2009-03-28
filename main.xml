@@ -114,6 +114,7 @@
   <script src="events.js" />
   <script src="geocode.js" />
   <script src="json_sans_eval.js" />
+  <script src="online_checker.js" />
   <script src="utils.js" />
   <script src="ui_agenda.js" />
   <script src="ui_calendar.js" />
