@@ -95,6 +95,7 @@ Calendar.prototype.getUpdateDate = function() {
  */
 Calendar.prototype.parse = function(elem) {
   this.id = this.get$t(elem.id);
+  this.id = this.id.substring(this.id.lastIndexOf("/") + 1);
   this.title = this.get$t(elem.title);
   this.email = this.get$t(elem.author[0].email);
   for (var i = 0; i < elem.link.length; ++i) {
