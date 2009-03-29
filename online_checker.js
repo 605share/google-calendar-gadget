@@ -27,7 +27,7 @@ OnlineChecker.prototype.ping = function() {
   var interval = OnlineChecker.CHECK_INTERVAL_MS;
   var fuzz = interval / 5;
   fuzz *= Math.random();
-  fuzz = Math.floor(fuzz)
+  fuzz = Math.floor(fuzz);
   interval += fuzz;
   this.pingTimer = view.setTimeout(this.makePing(), interval);
 
