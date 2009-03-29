@@ -7,8 +7,7 @@ function OnlineChecker() {
   // Assume online at first.
   this.isPingSucceeded = true;
   this.timeoutTimer = null;
-  this.pingTimer = view.setInterval(this.makePing(),
-      OnlineChecker.CHECK_INTERVAL_MS);
+  this.pingTimer = null;
   this.ping();
 }
 
@@ -25,6 +24,13 @@ OnlineChecker.prototype.isOnline = function() {
 };
 
 OnlineChecker.prototype.ping = function() {
+  var interval = OnlineChecker.CHECK_INTERVAL_MS;
+  var fuzz = interval / 5;
+  fuzz *= Math.random();
+  fuzz = Math.floor(fuzz)
+  interval += fuzz;
+  this.pingTimer = view.setTimeout(this.makePing(), interval);
+
   if (OnlineChecker.USE_FRAMEWORK_API) {
     if (framework.system.network.online) {
       this.isPingSucceeded = true;
