@@ -1,5 +1,5 @@
-OnlineChecker.PING_URL = 'http://clients3.google.com';
-OnlineChecker.CHECK_INTERVAL_MS = 15 * 60 * 1000;
+OnlineChecker.PING_URL = 'http://clients2.google.com';
+OnlineChecker.CHECK_INTERVAL_MS = 10 * 60 * 1000;
 OnlineChecker.PING_TIMEOUT_MS = 30 * 1000;
 OnlineChecker.USE_FRAMEWORK_API = true;
 
