@@ -374,6 +374,9 @@ MiniCalendar.prototype.drawWeeks = function() {
 
   // Detect last week we are showing and set tooltip for week header
   var lastWeek = Utils.getWeekNumber(currentDay);
+  if (g_calendarGadget.getWeekStart() > 0) {
+    lastWeek -= 1;
+  }
   var caption = strings.WEEK_HEADER;
   caption = caption.replace('[![FIRST]!]', firstWeek);
   caption = caption.replace('[![LAST]!]', lastWeek);
