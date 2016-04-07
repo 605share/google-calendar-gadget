@@ -1,0 +1,2 @@
+**Questions:**
+I'm curious what the goals are for this beta testing. There has not been a lot of exchange about expectations so far. Did you want us to only find bugs? Report interface concerns? Share improvement ideas? My experience with previous Google beta testing is that there is a focus on finding bugs and generally interface suggestions do not make it into the initial release. Let us know what you are looking for from us. Thanks :)

@@ -1,0 +1,1 @@
+Keep track of your Google Calendar events in this handy Desktop gadget.
